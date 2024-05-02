@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { UserContext } from '../context/UserContext';
 import Nav from "../components/Nav"
-import '../styles/Register.css'
+
 import { Link, useNavigate } from "react-router-dom";
 import { addUser } from '../service/userService';
 import Footer from '../components/Footer';
