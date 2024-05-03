@@ -1,10 +1,10 @@
 export const product = {
-    id: "",
-    code: "",
+  
+    codeProduct: "",
     product: "",
     description: "",
     price: "",
-    item: "",
-    qty: "",
+    category: "",
+    amount: "",
     images: ""
 }

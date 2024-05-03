@@ -1,9 +1,10 @@
+
 const urlProducts = 'http://localhost:3001/product'
 
 
 const controller = new AbortController();
 
-export const getAllInvtry = async (urlProducts) => {
+export const getProducts = async (urlProducts) => {
     try {
         const res = await fetch(urlProducts, {
             method: 'GET',
@@ -18,7 +19,7 @@ export const getAllInvtry = async (urlProducts) => {
     }
 }
 
-export const getAllInvtryById = async (id) => {
+export const getProductById = async (id) => {
     try {
         const res = await fetch(`${urlProducts}${id}`, {
             method: "GET",
@@ -33,12 +34,12 @@ export const getAllInvtryById = async (id) => {
     }
 }
 
-export const addInvtry = async (product) => {
+export const addProduct = async (product) => {
     try {
         const res = await fetch(urlProducts, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(invtry)
+            body: JSON.stringify(product)
         });
         if (!res.ok) throw new Error(`Response not OK`)
         const parsed = res.json()
@@ -48,9 +49,10 @@ export const addInvtry = async (product) => {
     }
 }
 
-export const deleteInvtry = async (invtry) => {
+export const deleteProduct = async (product) => {
+    const productDelete= product;
     try {
-        const res = await fetch(`${urlProducts}${invtry.id}`, {
+        const res = await fetch(`${urlProducts}/${productDelete.idProduct}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
         });
@@ -63,22 +65,35 @@ export const deleteInvtry = async (invtry) => {
     }
 }
 
-export const updateInvtryById = async (id, updatedProduct) => {
+
+export const updateProductById = async (id, updatedProduct) => {
     try {
-        const res = await fetch(`${urlProducts}${id}`, {
-            method: 'PUT',
+        // Crear un nuevo objeto con los campos deseados
+        const dataToSend = {
+            amount: Number(updatedProduct.amount),
+            category: updatedProduct.category,
+            codeProduct: updatedProduct.codeProduct,
+            description: updatedProduct.description,
+            images: updatedProduct.images,
+            product: updatedProduct.product,
+            price: updatedProduct.price
+        };
+
+        const res = await fetch(`${urlProducts}/${id}`, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(updatedProduct),
+            body: JSON.stringify(dataToSend),
         });
-        console.log("PRODUCTO NUEVO", updatedProduct);
+        console.log("PRODUCTO NUEVO", dataToSend);
         const product = await res.json();
         return product;
     } catch (err) {
         throw new Error(err);
     }
 }
+
 
 export const itemsInvtry = ['Tranquera', 'ropa trabajo', 'Ferretería'];
 
