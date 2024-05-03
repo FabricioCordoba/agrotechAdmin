@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { UserContext } from '../context/UserContext.jsx'
 import Nav from '../components/Nav'
-import { Link } from 'react-router-dom'
-import '../styles/Login.css'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Footer from '../components/Footer.jsx';

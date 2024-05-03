@@ -1,6 +1,6 @@
 
 import { Logo } from "./Logo";
-import "../styles/Nav.css"
+
 import { Link } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import { UserContext } from '../context/UserContext.jsx'

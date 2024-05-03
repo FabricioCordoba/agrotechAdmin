@@ -2,12 +2,11 @@ import Nav from "../components/Nav";
 import { FaUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import Footer from "../components/Footer";
-import "../styles/Home.css"
+
 import { Link } from "react-router-dom";
-import Card from '../components/Card'
-import BarCategoryProducts from '../components/BarCategoryProducts'
-import { UserContext } from '../context/UserContext.jsx'
+
 import React, { useContext, useEffect, useState } from 'react';
+import Tabla from "../components/Tabla";
 
 function Home() {
   
@@ -19,7 +18,7 @@ function Home() {
       </div>
 
       <div>
-        <BarCategoryProducts />
+        <Tabla/>
       </div>
 
      
