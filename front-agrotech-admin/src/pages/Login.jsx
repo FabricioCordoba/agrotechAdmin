@@ -29,7 +29,7 @@ function Login() {
 
 
             if (response.ok) {
-                if (data) {
+                if (data.rol === "Admin") {
                     handleLogin(data);
                     navigate('/');
                 } else {

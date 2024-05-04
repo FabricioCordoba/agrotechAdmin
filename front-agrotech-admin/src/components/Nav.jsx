@@ -1,6 +1,6 @@
 
 import { Logo } from "./Logo";
-
+// import "../styles/Nav.css"
 import { Link } from 'react-router-dom';
 import { GoSearch } from "react-icons/go";
 import { UserContext } from '../context/UserContext.jsx'
@@ -16,7 +16,7 @@ function Nav() {
         e.preventDefault()
         navigate(`/user-update/${user.id}`)
     }
-
+    const userName = user ? user.name : '';
     return (
         <>
             <div className="container-nav">
@@ -31,9 +31,10 @@ function Nav() {
                         <Link to={"/About"}><li>Nosotros</li></Link>
                         <Link to={"/Contact"}><li>Contactos</li></Link>
                         <>
-                            {user.name ? (
+                        {user && user.name ? (
+
                                 <>
-                                    <Link to={""} onClick={idUpdate}><li>{user.name}</li></Link>
+                                    <Link to={""} onClick={idUpdate}><li>{userName}</li></Link>
                                     <Link to={"/"}><li onClick={handleLogout}>Cerrar Sesion</li></Link>
                                 </>
                             ) : (
