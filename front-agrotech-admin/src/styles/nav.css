@@ -1,0 +1,68 @@
+.container-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa; /* Color blanco */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 10px 20px;
+}
+
+.container-barra-searcha {
+    display: flex;
+    align-items: center;
+}
+
+.input-search {
+    padding: 8px;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    background-color: #e9ecef; /* Color gris claro */
+    color: #495057; /* Color de texto */
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1); /* Sombra interna */
+}
+
+.container-list {
+    display: flex;
+    align-items: center;
+}
+
+.navList {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.navList li {
+    margin-right: 20px;
+    color: #495057; /* Color de texto */
+    cursor: pointer;
+    transition: color 0.3s ease; /* Transición de color */
+}
+
+.navList li:last-child {
+    margin-right: 0;
+}
+
+.navList li:hover {
+    color: #343a40; /* Color de texto más oscuro al hacer hover */
+}
+
+.navList li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navList li a:hover {
+    text-decoration: underline;
+}
+.navList li {
+    margin-right: 20px; /* Espacio entre elementos */
+    color: #495057; /* Color de texto */
+    cursor: pointer;
+    transition: color 0.3s ease; /* Transición de color */
+}
+
+.navList li:last-child {
+    margin-right: 0; /* Eliminar margen del último elemento */
+}

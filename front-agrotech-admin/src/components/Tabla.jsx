@@ -5,6 +5,7 @@ import { AiFillEdit } from "react-icons/ai";
 import { ProductContext } from '../context/ProductContext';
 import { product } from '../service/product';
 import { useNavigate } from 'react-router-dom';
+// import "../styles/tabla.css"
 
 function Tabla() {
     const navigate = useNavigate();
