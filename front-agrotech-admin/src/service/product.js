@@ -1,5 +1,5 @@
 export const product = {
-  
+  idProduct:"",
     codeProduct: "",
     product: "",
     description: "",

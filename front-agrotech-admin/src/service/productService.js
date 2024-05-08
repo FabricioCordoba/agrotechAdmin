@@ -34,15 +34,27 @@ export const getProductById = async (id) => {
     }
 }
 
-export const addProduct = async (product) => {
+export const addProduct = async (productAdd) => {
+    const dataToSend = {
+        amount: Number(productAdd.amount),
+        category: productAdd.category,
+        
+        description: productAdd.description,
+        images: productAdd.images,
+        product: productAdd.product,
+        price:Number( productAdd.price)
+    };
     try {
         const res = await fetch(urlProducts, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(product)
+            body: JSON.stringify(dataToSend)
         });
+        console.log(dataToSend);
+
         if (!res.ok) throw new Error(`Response not OK`)
         const parsed = res.json()
+        window.location.reload();
         return parsed;
     } catch (err) {
         throw new Error(err);

@@ -13,10 +13,10 @@ function Register() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        let newUser = { ...userRegister, rol: "admin", active: true }
+        let newUser = { ...userRegister, rol: "Admin", active: true }
 
         await addUser(newUser);
-        navigate('/login')
+        navigate('/')
     }
     function handleChange(e) {
         e.preventDefault();
