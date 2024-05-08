@@ -5,14 +5,20 @@ import { AiFillEdit } from "react-icons/ai";
 import { ProductContext } from '../context/ProductContext';
 import { product } from '../service/product';
 import { useNavigate } from 'react-router-dom';
+import { addProduct } from '../service/productService';
 // import "../styles/tabla.css"
 
 function Tabla() {
     const navigate = useNavigate();
-    
-    const modalDeleteRef = useRef(null);
+
     const { products } = useContext(ProductContext);
-    console.log("tabla", products);
+    console.log(products);
+
+    const modalDeleteRef = useRef(null);
+    const modalAddProductRef = useRef(null);
+    const modalCsvRef = useRef(null)
+    const [productAdd, setProductAdd] = useState()
+    const [file, setFile] = useState(null);
     const [productUpdate, setProductUpdate] = useState({
         idProduct: product.idProduct,
         codeProduct: product.codeProduct,
@@ -24,7 +30,7 @@ function Tabla() {
         images: product.images
     });
 
-    function handleChange(e) {
+    function handleChangeEdit(e) {
         e.preventDefault();
         setProductUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }))
         return productUpdate
@@ -41,33 +47,94 @@ function Tabla() {
         setProductUpdate(producto);
         modalEdit.showModal()
     };
-   
-//     const handleDeleteClick = (product) => {
-//         setProductUpdate(product)
-//         modalDelete.showModal()
-//     }
-// const cancelModal =()=>{
-//    modalDelete.Moda
-// }
 
-const handleDeleteClick = (product) => {
-    setProductUpdate(product)
-    modalDeleteRef.current.showModal();
-}
 
-const cancelModal = () => {
-    modalDeleteRef.current.close(); // Cerrar el modal utilizando la referencia
-}
+    const handleDeleteClick = (product) => {
+        setProductUpdate(product)
+        modalDeleteRef.current.showModal();
+    }
 
-const confirmDelete = () => {
-    deleteProduct(productUpdate);
-    modalDeleteRef.current.close(); // Cerrar el modal después de eliminar el producto
-}
+    const cancelDeleteModal = () => {
+        modalDeleteRef.current.close(); // Cerrar el modal utilizando la referencia
+    }
+
+    const confirmDelete = () => {
+        deleteProduct(productUpdate);
+        modalDeleteRef.current.close(); // Cerrar el modal después de eliminar el producto
+    }
+    //---------------------------------------------------------------------------------------------------------------------------
+    function handleChangeAdd(e) {
+        e.preventDefault();
+        setProductAdd(prev => ({ ...prev, [e.target.name]: e.target.value }))
+        console.log("handl", productAdd);
+
+        return productAdd
+    };
+
+    const handleAddClick = (productAdd) => {
+        setProductAdd(productAdd)
+        modalAddProductRef.current.showModal();
+    }
+
+    const canceAddlModal = () => {
+        modalAddProductRef.current.close(); // Cerrar el modal utilizando la referencia
+    }
+
+    const confirmarAdd = async () => {
+        const productAddResponse = await addProduct(productAdd);
+        return productAddResponse
+    };
+    //---------------------------------------------------------------------------------------------------------------------------------
+    const handleAddCsv = () => {
+        modalCsvRef.current.showModal()
+    }
+
+
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        setFile(selectedFile);
+        console.log("file", selectedFile);
+    };
+
+    const handleUpload = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('http://localhost:3001/product/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Error al cargar el archivo');
+            }
+
+            const data = await response.json();
+            console.log(data); // Manejar la respuesta del servidor
+        } catch (error) {
+            console.error('Error al cargar el archivo:', error);
+        }
+    };
+
+
+    const canceAddCsvlModal = () => {
+        modalCsvRef.current.close(); // Cerrar el modal utilizando la referencia
+    }
+
+
 
     return (
         <section className='layout'>
             <div className="table-container">
                 <h1>Lista de Productos</h1>
+
+                <div>
+                    <button onClick={() => handleAddClick(productAdd)}>Argregar Producto</button>
+                    <button onClick={handleAddCsv}>Agregar CSV</button>
+                </div>
+
                 <table className="product-table">
                     <thead>
                         <tr>
@@ -112,45 +179,60 @@ const confirmDelete = () => {
                                 type="text"
                                 name="codeProduct"
                                 value={productUpdate.codeProduct}
-                                onChange={handleChange}
+                                onChange={handleChangeEdit}
 
                             />
                             <input
                                 type="text"
                                 name="product"
                                 value={productUpdate.product}
-                                onChange={handleChange}
+                                onChange={handleChangeEdit}
 
                             />
                             <input
                                 type="text"
                                 name="description"
                                 value={productUpdate.description}
-                                onChange={handleChange}
+                                onChange={handleChangeEdit}
 
                             />
                             <input
                                 type="number"
                                 name="price"
                                 value={productUpdate.price}
-                                onChange={handleChange}
+                                onChange={handleChangeEdit}
                             />
-                            <input
-                                type="text"
+
+                            <select type="text"
                                 name="category"
-                                value={productUpdate.category}
-                                onChange={handleChange}
-                            />
+
+                                onChange={handleChangeEdit}>
+                                <option value="Ferretería">Ferretería</option>
+                                <option value="Ropa de trabajo">Ropa de trabajo</option>
+                                <option value="Tranqueras">Tranqueras</option>
+                                <option value="Repuestos agricolas">Repuestos agricolas</option>
+                                <option value="Equipamiento vehículos">Equipamiento vehículos</option>
+                                <option value="Pulverizacío">Pulverizacío</option>
+                                <option value="Construcción">Construcción</option>
+                                <option value="Infraestructura">Infraestructura</option>
+                                <option value="Energias renovables">Energias renovables</option>
+                                <option value="Maquinaria agrícola">Maquinaria agrícola</option>
+                                <option value="Forestación y Jardinería">Forestación y Jardinería</option>
+                                <option value="Agricultura de precision">Agricultura de precision</option>
+
+                            </select>
+
                             <input
                                 type="number"
                                 name="amount"
                                 value={productUpdate.amount}
-                                onChange={handleChange}
+                                onChange={handleChangeEdit}
                             />
                             <input
                                 type="text"
+                                name='images'
                                 value={productUpdate.images}
-                                onChange={handleChange}
+                                onChange={handleChangeEdit}
                             />
                             <button onClick={handleSaveClick}>Guardar</button>
                             <button >Cancelar</button>
@@ -163,11 +245,81 @@ const confirmDelete = () => {
                 <dialog ref={modalDeleteRef} id='modalDelete'>
                     <p>¿Desea eliminar el producto? {productUpdate.product}</p>
                     <button onClick={confirmDelete}>Aceptar</button>
-                    <button onClick={ cancelModal}>Cancelar</button>
+                    <button onClick={cancelDeleteModal}>Cancelar</button>
                 </dialog>
 
             )
             }
+
+            {product && (
+                <dialog ref={modalAddProductRef} id='modalAddProduct'>
+                    <form action="" method="dialog" id="formAdd" >
+
+                        <input
+                            type="text"
+                            name="product"
+                            placeholder='Nombre Producto'
+                            onChange={handleChangeAdd}
+                        />
+                        <input
+                            type="text"
+                            name="description"
+                            placeholder='Descripcion'
+                            onChange={handleChangeAdd}
+                        />
+                        <input
+                            type="number"
+                            name="price"
+                            placeholder='Precio'
+                            onChange={handleChangeAdd}
+                        />
+                        <select type="text"
+                            name="category"
+
+                            onChange={handleChangeAdd}>
+                            <option value="Ferretería">Ferretería</option>
+                            <option value="Ropa de trabajo">Ropa de trabajo</option>
+                            <option value="Tranqueras">Tranqueras</option>
+                            <option value="Repuestos agricolas">Repuestos agricolas</option>
+                            <option value="Equipamiento vehículos">Equipamiento vehículos</option>
+                            <option value="Pulverizacío">Pulverizacío</option>
+                            <option value="Construcción">Construcción</option>
+                            <option value="Infraestructura">Infraestructura</option>
+                            <option value="Energias renovables">Energias renovables</option>
+                            <option value="Maquinaria agrícola">Maquinaria agrícola</option>
+                            <option value="Forestación y Jardinería">Forestación y Jardinería</option>
+                            <option value="Agricultura de precision">Agricultura de precision</option>
+
+                        </select>
+
+                        <input
+                            type="number"
+                            name="amount"
+                            placeholder='stock'
+                            onChange={handleChangeAdd}
+                        />
+                        <input
+                            type="text"
+                            name="images"
+                            placeholder='imagen'
+                            onChange={handleChangeAdd}
+                        />
+                        <button onClick={confirmarAdd}>Guardar</button>
+                        <button onClick={canceAddlModal}>Cancelar</button>
+                    </form>
+
+                </dialog>
+            )};
+            <dialog ref={modalCsvRef} id='modalCsv'>
+                <form action="" method="dialog" id="formAddCsv">
+                    <input type="file" onChange={handleFileChange} />
+                    <p>Subi un archivo CSV </p>
+                    <button onClick={handleUpload}>Aceptar</button>
+                    <button onClick={canceAddCsvlModal}>Cancelar</button>
+
+                </form>
+
+            </dialog>
         </section>
     );
 }
