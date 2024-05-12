@@ -1,23 +1,18 @@
-import { useContext, useState, useRef } from 'react'
-import { deleteProduct, updateProductById } from '../service/productService';
-import { AiFillDelete } from "react-icons/ai";
-import { AiFillEdit } from "react-icons/ai";
-import { ProductContext } from '../context/ProductContext';
-import { product } from '../service/product';
+import { useRef, useState } from 'react';
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
-import { addProduct } from '../service/productService';
+import { addProduct, deleteProduct, updateProductById } from '../service/productService';
+import { product } from '../service/product';
 // import "../styles/tabla.css"
 
-function Tabla() {
-    const navigate = useNavigate();
+function Tabla({ products }) {
 
-    const { products } = useContext(ProductContext);
-    console.log(products);
+    const navigate = useNavigate();
 
     const modalDeleteRef = useRef(null);
     const modalAddProductRef = useRef(null);
-    const modalCsvRef = useRef(null)
-    const [productAdd, setProductAdd] = useState()
+    const modalCsvRef = useRef(null);
+    const [productAdd, setProductAdd] = useState();
     const [file, setFile] = useState(null);
     const [productUpdate, setProductUpdate] = useState({
         idProduct: product.idProduct,
@@ -32,69 +27,62 @@ function Tabla() {
 
     function handleChangeEdit(e) {
         e.preventDefault();
-        setProductUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }))
-        return productUpdate
-    };
+        setProductUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        return productUpdate;
+    }
 
     const handleSaveClick = async () => {
-        console.log("idEditar", productUpdate.idProduct);
         const updatedProductResponse = await updateProductById(productUpdate.idProduct, productUpdate);
-        return updatedProductResponse
+        return updatedProductResponse;
     };
-
 
     const handleEditClick = (producto) => {
         setProductUpdate(producto);
-        modalEdit.showModal()
+        modalEdit.showModal();
     };
 
-
     const handleDeleteClick = (product) => {
-        setProductUpdate(product)
+        setProductUpdate(product);
         modalDeleteRef.current.showModal();
-    }
+    };
 
     const cancelDeleteModal = () => {
         modalDeleteRef.current.close(); // Cerrar el modal utilizando la referencia
-    }
+    };
 
     const confirmDelete = () => {
         deleteProduct(productUpdate);
         modalDeleteRef.current.close(); // Cerrar el modal después de eliminar el producto
-    }
+    };
+
     //---------------------------------------------------------------------------------------------------------------------------
     function handleChangeAdd(e) {
         e.preventDefault();
-        setProductAdd(prev => ({ ...prev, [e.target.name]: e.target.value }))
-        console.log("handl", productAdd);
-
-        return productAdd
-    };
+        setProductAdd(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        return productAdd;
+    }
 
     const handleAddClick = (productAdd) => {
-        setProductAdd(productAdd)
+        setProductAdd(productAdd);
         modalAddProductRef.current.showModal();
-    }
+    };
 
     const canceAddlModal = () => {
         modalAddProductRef.current.close(); // Cerrar el modal utilizando la referencia
-    }
+    };
 
     const confirmarAdd = async () => {
         const productAddResponse = await addProduct(productAdd);
-        return productAddResponse
+        return productAddResponse;
     };
     //---------------------------------------------------------------------------------------------------------------------------------
     const handleAddCsv = () => {
-        modalCsvRef.current.showModal()
-    }
-
-
+        modalCsvRef.current.showModal();
+    };
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         setFile(selectedFile);
-        console.log("file", selectedFile);
     };
 
     const handleUpload = async () => {
@@ -112,18 +100,14 @@ function Tabla() {
             }
 
             const data = await response.json();
-            console.log(data); // Manejar la respuesta del servidor
         } catch (error) {
             console.error('Error al cargar el archivo:', error);
         }
     };
 
-
     const canceAddCsvlModal = () => {
         modalCsvRef.current.close(); // Cerrar el modal utilizando la referencia
-    }
-
-
+    };
 
     return (
         <section className='layout'>
@@ -155,7 +139,7 @@ function Tabla() {
                                 <td>{product.codeProduct}</td>
                                 <td>{product.product}</td>
                                 <td>{product.description}</td>
-                                <td>${(product.price)}</td>
+                                <td>${product.price}</td>
                                 <td>{product.category}</td>
                                 <td>{product.amount}</td>
                                 <td><img src={product.images} alt={product.product} width="50" /></td>

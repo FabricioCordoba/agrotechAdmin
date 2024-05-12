@@ -31,7 +31,7 @@ function Login() {
             if (response.ok) {
                 if (data.rol === "Admin") {
                     handleLogin(data);
-                    navigate('/home');
+                    navigate('/products');
                 } else {
                     throw new Error('Usuario inactivo');
                 }
