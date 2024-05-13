@@ -1,0 +1,18 @@
+.sidebar{
+    width: 14rem;
+    height: calc(100vh -52px);
+    border-right: 1px solid gray;
+    
+}
+.sidebar ul{
+    list-style: none;
+    padding: 1rem 2 rem;
+}
+
+.sidebar li{
+    margin-bottom: 1rem;
+}
+.sidebar a:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
