@@ -4,6 +4,7 @@ import Nav from '../components/Nav'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Footer from '../components/Footer.jsx';
+import { jwtDecode } from "jwt-decode"
 
 function Login() {
 
@@ -21,7 +22,6 @@ function Login() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(userLogin),
-
             });
             console.log("hola", userLogin);
             const data = await response.json();
@@ -29,7 +29,12 @@ function Login() {
 
 
             if (response.ok) {
-                if (data.rol === "Admin") {
+                const userToken = data.access_token
+                const decoded = jwtDecode(userToken);
+
+                console.log("token", decoded);
+
+                if (decoded.rol === "Admin" && decoded.active ===true) {
                     handleLogin(data);
                     navigate('/products');
                 } else {

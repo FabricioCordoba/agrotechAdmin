@@ -227,7 +227,7 @@ function Tabla({ products }) {
 
             {productUpdate && (
                 <dialog ref={modalDeleteRef} id='modalDelete'>
-                    <p>¿Desea eliminar el producto? {productUpdate.product}</p>
+                    <p>¿Desea eliminar el producto {productUpdate.product}?</p>
                     <button onClick={confirmDelete}>Aceptar</button>
                     <button onClick={cancelDeleteModal}>Cancelar</button>
                 </dialog>

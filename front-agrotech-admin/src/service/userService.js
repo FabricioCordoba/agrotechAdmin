@@ -69,16 +69,27 @@ export const deleteUser = async (user) => {
 }
 
 export const updateUserById = async (id, updatedUser) => {
+ 
+
     try {
+        const dataToSend = {      
+            name: updatedUser.name,
+            lastname: updatedUser.lastname,
+            phone: updatedUser.phone,
+            email: updatedUser.email,
+        
+        
+        };
         const res = await fetch(`${url_users}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(updatedUser),
+            body: JSON.stringify(dataToSend),
         });
-        console.log("USUARIO NUEVO", updatedUser);
+        console.log("USUARIO NUEVO", dataToSend);
         const parsed = await res.json();
+       
         return parsed;
     } catch (err) {
         throw new Error(err);
