@@ -27,7 +27,7 @@ function Sidebar() {
         <>
             <div className="sidebar">
                 <ul>
-                    <li><Link>Productos</Link></li>
+                    <li><Link to={"/Products"}>Productos</Link></li>
                     <li>Categoria</li>
                     <div className='container-barra-category-products'>
                         <ul className='ul-bar-category'>
@@ -46,8 +46,8 @@ function Sidebar() {
 
                         </ul>
                     </div>
-                    <li><Link>Clientes</Link></li>
-                    <li><Link></Link></li>
+                    <li><Link to={"/Clients"}>Clientes</Link></li>
+                    <li><Link>Ventas</Link></li>
                     <li><Link></Link></li>
 
                 </ul>

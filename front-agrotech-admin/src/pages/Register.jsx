@@ -14,7 +14,7 @@ function Register() {
     async function handleSubmit(e) {
         e.preventDefault();
         let newUser = { ...userRegister, rol: "Admin", active: true }
-
+        
         await addUser(newUser);
         navigate('/')
     }
@@ -28,8 +28,8 @@ function Register() {
     return (
         <>
             <Nav />
-            <div className="container"> 
-                <form className="form" onSubmit={handleSubmit}> 
+            <div className="container">
+                <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor='name'>Nombre</label>
                     <input type='text' name='name' id='name' onChange={handleChange} />
 

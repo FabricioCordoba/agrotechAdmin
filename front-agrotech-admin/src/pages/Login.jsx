@@ -4,6 +4,7 @@ import Nav from '../components/Nav'
 import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Footer from '../components/Footer.jsx';
+import { jwtDecode } from "jwt-decode"
 
 function Login() {
 
@@ -15,21 +16,19 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/auth/login', {
+            const response = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(userLogin),
-
             });
             console.log("hola", userLogin);
             const data = await response.json();
             console.log("q es data", data);
 
-
             if (response.ok) {
-                if (data.rol === "Admin") {
+                if (data) {
                     handleLogin(data);
                     navigate('/products');
                 } else {
@@ -48,7 +47,7 @@ function Login() {
     };
     return (
         <>
-            <Nav />
+      
             <div className="container-form-login">
                 <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="email">Email</label>

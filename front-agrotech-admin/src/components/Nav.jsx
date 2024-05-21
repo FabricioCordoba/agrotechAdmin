@@ -28,23 +28,11 @@ function Nav() {
                 </div>
                 <nav className="container-list">
                     <ul className='navList'>
-                        <Link to={"/About"}><li>Nosotros</li></Link>
-                        <Link to={"/Contact"}><li>Contactos</li></Link>
-                        <>
-                        {user && user.name ? (
 
-                                <>
-                                    <Link to={""} onClick={idUpdate}><li>{userName}</li></Link>
-                                    <Link to={"/"}><li onClick={handleLogout}>Cerrar Sesion</li></Link>
-                                </>
-                            ) : (
-                                <>
-                                    <Link to={"/login"}><li>Iniciar sesión</li></Link>
-                                    <Link to={"/Register"}><li>Registrarme</li></Link>
-                                </>
-                            )
-                            }
-                        </>
+                        <Link to={""} onClick={idUpdate}><li>{userName}</li></Link>
+                        <Link to={"/Register"}><li>Registrar Administrador</li></Link>
+                        <Link to={"/"}><li onClick={handleLogout}>Cerrar Sesion</li></Link>
+
                     </ul>
                 </nav>
             </div>

@@ -1,6 +1,6 @@
 
 
-export const url_users = 'http://localhost:3001/user'
+export const url_users = 'http://localhost:3000/user'
 
 const controller = new AbortController();
 
@@ -41,6 +41,9 @@ export const addUser = async (user) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user)
         });
+        console.log("usuario", user);
+
+
         if (!res.ok) throw new Error(`Response not OK`)
         const parsed = res.json()
         console.log("user",user);
@@ -52,15 +55,16 @@ export const addUser = async (user) => {
 }
 
 export const deleteUser = async (user) => {
+    console.log(user);
     try {
-        const res = await fetch(`${url_users}/${user.id}`, {
+        const res = await fetch(`${url_users}/${user.idUser}`, {
             method: 'DELETE',
-             headers: {'Authorization': `Bearer ${user.access_token}`,
-              'Content-Type': 'application/json' }
+             headers: {'Content-Type': 'application/json' }
         });
         if (!res.ok) throw new Error(`Response not OK`)
         const parsed = await res.json();
         window.location.reload();
+        console.log(parsed);
            
     return parsed
     } catch (err) {
@@ -69,16 +73,27 @@ export const deleteUser = async (user) => {
 }
 
 export const updateUserById = async (id, updatedUser) => {
+ 
+
     try {
+        const dataToSend = {      
+            name: updatedUser.name,
+            lastname: updatedUser.lastname,
+            phone: updatedUser.phone,
+            email: updatedUser.email,
+        
+        
+        };
         const res = await fetch(`${url_users}/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(updatedUser),
+            body: JSON.stringify(dataToSend),
         });
-        console.log("USUARIO NUEVO", updatedUser);
+        console.log("USUARIO NUEVO", dataToSend);
         const parsed = await res.json();
+       
         return parsed;
     } catch (err) {
         throw new Error(err);

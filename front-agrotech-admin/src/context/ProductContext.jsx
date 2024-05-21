@@ -5,7 +5,7 @@ export const ProductContext = createContext(product);
 
 export const ProductProvider = ({ children }) => {
 
-    const urlProducts = 'http://localhost:3001/product'
+    const urlProducts = 'http://localhost:3000/product'
     const [products, setProducts] = useState([]);
 
     const fetchProducts = async (urlProducts) => {

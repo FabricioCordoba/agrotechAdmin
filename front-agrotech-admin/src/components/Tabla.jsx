@@ -90,7 +90,7 @@ function Tabla({ products }) {
             const formData = new FormData();
             formData.append('file', file);
 
-            const response = await fetch('http://localhost:3001/product/upload', {
+            const response = await fetch('http://localhost:3000/product/upload', {
                 method: 'POST',
                 body: formData
             });
@@ -227,7 +227,7 @@ function Tabla({ products }) {
 
             {productUpdate && (
                 <dialog ref={modalDeleteRef} id='modalDelete'>
-                    <p>¿Desea eliminar el producto? {productUpdate.product}</p>
+                    <p>¿Desea eliminar el producto {productUpdate.product}?</p>
                     <button onClick={confirmDelete}>Aceptar</button>
                     <button onClick={cancelDeleteModal}>Cancelar</button>
                 </dialog>
