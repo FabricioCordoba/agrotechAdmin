@@ -4,11 +4,15 @@ import { updateUserById, deleteUser } from "../service/userService";
 
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { UserContext } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
+
 
 
 function TablaUser({ clients }) {
   const { user} = useContext(UserContext);
 console.log("user", user);
+const navigate = useNavigate();
+
 
 
 
@@ -59,6 +63,12 @@ console.log("user", user);
         modalDeleteRef.current.close(); // Cerrar el modal después de eliminar el producto
     };
 
+
+    
+    function purchases() {
+
+        navigate("/customer-purchases")
+    }
     return (
         <>
 
@@ -88,7 +98,7 @@ console.log("user", user);
                                 <button onClick={() => handleDeleteClick(user)}><AiFillDelete /></button>
                             </td>
                             <td>
-                                <button>historial de compras</button>
+                                <button onClick={()=> purchases()}>historial de compras</button>
                             </td>
 
                         </tr>

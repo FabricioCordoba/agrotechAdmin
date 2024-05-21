@@ -16,7 +16,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('http://localhost:3001/auth/login', {
+            const response = await fetch('http://localhost:3000/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,14 +27,8 @@ function Login() {
             const data = await response.json();
             console.log("q es data", data);
 
-
             if (response.ok) {
-                const userToken = data.access_token
-                const decoded = jwtDecode(userToken);
-
-                console.log("token", decoded);
-
-                if (decoded.rol === "Admin" && decoded.active ===true) {
+                if (data) {
                     handleLogin(data);
                     navigate('/products');
                 } else {
@@ -53,7 +47,7 @@ function Login() {
     };
     return (
         <>
-            <Nav />
+      
             <div className="container-form-login">
                 <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="email">Email</label>

@@ -6,7 +6,7 @@ export const UserContext = createContext(user);
 
 export const UserProvider = ({ children }) => {
 
-  const urlUsers = 'http://localhost:3001/user'
+  const urlUsers = 'http://localhost:3000/user'
 
   const [clients, setClients] = useState([])
 
@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
           const data = await response.json();
           console.log("data",data);
 
-        const clientsDb = data.filter(user=> user.rol=== "user" && user.active === true);
+        const clientsDb = data.filter(user=> user.rol=== "user" && user.active===true );
 
           setClients(clientsDb);
           console.log("data",clientsDb);
