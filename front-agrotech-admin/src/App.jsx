@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="products/:category" element={<Category/>} />
         <Route path="/Clients" element={<Clients/>}/>
-        <Route path="/customer-purchases" element={<CustomerPurchases/>}/>
+        <Route path="/customer-purchases/:id" element={<CustomerPurchases/>}/>
 
       </Routes>
 

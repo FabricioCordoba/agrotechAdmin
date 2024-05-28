@@ -1,8 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import React, { useEffect, useState } from 'react';
 
-const TablaCustomerPurchases = () => {
-    const { user } = useContext(UserContext);
+const TablaCustomerPurchases = ({ idUser }) => {
     const [invoices, setInvoices] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -10,7 +8,7 @@ const TablaCustomerPurchases = () => {
     useEffect(() => {
         const fetchInvoices = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/invoices/user/${user.idUser}`);
+                const response = await fetch(`http://localhost:3000/invoices/user/${idUser}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch invoices');
                 }
@@ -23,14 +21,13 @@ const TablaCustomerPurchases = () => {
             }
         };
 
-        if (user) {
+        if (idUser) {
             fetchInvoices();
         }
-    }, [user]);
+    }, [idUser]);
 
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error: {error}</p>;
-
+    if (error) return <p>Aun no registra compras</p>;
 
     return (
         <div>
@@ -54,8 +51,11 @@ const TablaCustomerPurchases = () => {
                                 <td>
                                     <ul>
                                         {invoice.invoiceDetails.map((detail) => (
-                                            <li key={detail.idInvoicesDetails}>
-                                                {detail.id_product.product} - Cantidad: {detail.amount_sold}
+                                            <li key={detail.id}>
+                                                Producto: {detail.product.product} - 
+                                                Descripción: {detail.product.description} - 
+                                                Precio: {detail.product.price} - 
+                                                Cantidad: {detail.amount_sold}
                                             </li>
                                         ))}
                                     </ul>
@@ -71,4 +71,4 @@ const TablaCustomerPurchases = () => {
     );
 };
 
-export default TablaCustomerPurchases ;
+export default TablaCustomerPurchases;

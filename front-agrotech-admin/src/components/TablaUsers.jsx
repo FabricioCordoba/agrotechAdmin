@@ -1,24 +1,15 @@
-import React from "react";
-import { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { updateUserById, deleteUser } from "../service/userService";
-
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
-
-
 function TablaUser({ clients }) {
-  const { user} = useContext(UserContext);
-console.log("user", user);
-const navigate = useNavigate();
-
-
-
+    const { user } = useContext(UserContext);
+    const navigate = useNavigate();
 
     const modalDeleteRef = useRef(null);
     const modalEditRef = useRef(null)
-
 
     const [clientUpdate, setClientUpdate] = useState({
         idUser: user.idUser,
@@ -26,22 +17,16 @@ const navigate = useNavigate();
         lastname: user.lastname,
         phone: user.phone,
         email: user.email,
-     
     });
 
     function handleChangeEditClient(e) {
         e.preventDefault();
         setClientUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }));
-        console.log("formulario", clientUpdate);
-        return clientUpdate;
     }
 
     const handleSaveClick = async () => {
-        console.log("usuario para guardar", clientUpdate);
         const updatedclientResponse = await updateUserById(clientUpdate.idUser, clientUpdate);
-        console.log("guardar", updatedclientResponse);
         return updatedclientResponse;
-
     };
 
     const handleEditClick = (client) => {
@@ -55,23 +40,20 @@ const navigate = useNavigate();
     };
 
     const cancelDeleteModal = () => {
-        modalDeleteRef.current.close(); // Cerrar el modal utilizando la referencia
+        modalDeleteRef.current.close();
     };
 
     const confirmDelete = () => {
         deleteUser(clientUpdate);
-        modalDeleteRef.current.close(); // Cerrar el modal después de eliminar el producto
+        modalDeleteRef.current.close();
     };
 
+    const purchases = (idUser) => {
+        navigate(`/customer-purchases/${idUser}`);
+    };
 
-    
-    function purchases() {
-
-        navigate("/customer-purchases")
-    }
     return (
         <>
-
             <table className="clients-table">
                 <thead>
                     <tr>
@@ -79,7 +61,6 @@ const navigate = useNavigate();
                         <th>Apellido</th>
                         <th>Telefono</th>
                         <th>Email</th>
-                        
                     </tr>
                 </thead>
                 <tbody>
@@ -89,8 +70,6 @@ const navigate = useNavigate();
                             <td>{user.lastname}</td>
                             <td>{user.phone}</td>
                             <td>{user.email}</td>
-                            
-
                             <td>
                                 <button className='button-edit' onClick={() => handleEditClick(user)}><AiFillEdit /></button>
                             </td>
@@ -98,9 +77,8 @@ const navigate = useNavigate();
                                 <button onClick={() => handleDeleteClick(user)}><AiFillDelete /></button>
                             </td>
                             <td>
-                                <button onClick={()=> purchases()}>historial de compras</button>
+                                <button onClick={() => purchases(user.idUser)}>Historial de Compras</button>
                             </td>
-
                         </tr>
                     ))}
                 </tbody>
@@ -110,38 +88,33 @@ const navigate = useNavigate();
                 <div className='edit-form'>
                     <dialog ref={modalEditRef} id="modalEdit">
                         <h2>Editar cliente</h2>
-                        <form action="" method="dialog" id="form" >
+                        <form action="" method="dialog" id="form">
                             <input
                                 type="text"
                                 name="name"
                                 value={clientUpdate.name}
                                 onChange={handleChangeEditClient}
-
                             />
                             <input
                                 type="text"
                                 name="lastname"
                                 value={clientUpdate.lastname}
                                 onChange={handleChangeEditClient}
-
                             />
                             <input
                                 type="text"
                                 name="phone"
                                 value={clientUpdate.phone}
                                 onChange={handleChangeEditClient}
-
                             />
                             <input
                                 type="text"
                                 name="email"
                                 value={clientUpdate.email}
                                 onChange={handleChangeEditClient}
-
                             />
-                           
                             <button onClick={handleSaveClick}>Guardar</button>
-                            <button >Cancelar</button>
+                            <button>Cancelar</button>
                         </form>
                     </dialog>
                 </div>
@@ -149,17 +122,13 @@ const navigate = useNavigate();
 
             {clientUpdate && (
                 <dialog ref={modalDeleteRef} id='modalDelete'>
-                    <p>¿Desea eliminar al cliente {clientUpdate.name} {clientUpdate.lastname} </p>
+                    <p>¿Desea eliminar al cliente {clientUpdate.name} {clientUpdate.lastname}?</p>
                     <button onClick={confirmDelete}>Aceptar</button>
                     <button onClick={cancelDeleteModal}>Cancelar</button>
                 </dialog>
-
-            )
-            }
-
-
+            )}
         </>
-    )
+    );
 }
 
-export default TablaUser
+export default TablaUser;
