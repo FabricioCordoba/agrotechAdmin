@@ -19,6 +19,8 @@ function TablaUser({ clients }) {
         email: user.email,
     });
 
+    const [filtroApellido, setFiltroApellido] = useState('');
+
     function handleChangeEditClient(e) {
         e.preventDefault();
         setClientUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -52,22 +54,29 @@ function TablaUser({ clients }) {
         navigate(`/customer-purchases/${idUser}`);
     };
 
+    const handleFilterByLastName = (e) => {
+        setFiltroApellido(e.target.value.toLowerCase());
+    };
+
+    const filteredClients = clients.filter(client => client.lastname.toLowerCase().startsWith(filtroApellido));
+
     return (
         <>
+            <input type="text" placeholder="Buscar por apellido..." value={filtroApellido} onChange={handleFilterByLastName} />
             <table className="clients-table">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
                         <th>Apellido</th>
+                        <th>Nombre</th>
                         <th>Telefono</th>
                         <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {clients.map((user) => (
+                    {filteredClients.map((user) => (
                         <tr key={user.idUser}>
-                            <td>{user.name}</td>
                             <td>{user.lastname}</td>
+                            <td>{user.name}</td>
                             <td>{user.phone}</td>
                             <td>{user.email}</td>
                             <td>
