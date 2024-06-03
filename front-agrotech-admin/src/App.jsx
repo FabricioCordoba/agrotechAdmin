@@ -10,6 +10,7 @@ import Category from "./pages/Category"
 import Products from "./pages/Products"
 import Clients from "./pages/Clients"
 import CustomerPurchases from "./pages/CustomerPurchases"
+import VentasPage from "./pages/VentasPage"
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="products/:category" element={<Category/>} />
         <Route path="/Clients" element={<Clients/>}/>
-        <Route path="/customer-purchases" element={<CustomerPurchases/>}/>
+        <Route path="/customer-purchases/:id" element={<CustomerPurchases/>}/>
+        <Route path="/ventas" element={<VentasPage/>}/>
 
       </Routes>
 

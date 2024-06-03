@@ -47,7 +47,8 @@ function Sidebar() {
                         </ul>
                     </div>
                     <li><Link to={"/Clients"}>Clientes</Link></li>
-                    <li><Link>Ventas</Link></li>
+                    <li><Link to={"/ventas"}>Ventas</Link></li>
+
                     <li><Link></Link></li>
 
                 </ul>
