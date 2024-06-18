@@ -1,34 +1,126 @@
+
 .layout {
-    background-color: #fff; /* Fondo blanco */
-    color: #333; /* Texto gris oscuro */
-  }
-  
-  .table-container {
+  width: 100%;
+  background-color: #fff;
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para la tabla de productos */
+.table-container {
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.product-table th,
+.product-table td {
+  border: 1px solid #ccc;
+  padding: 12px;
+  text-align: center;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.produc-edeeit-img {
+  max-width: 50px;
+  border-radius: 5%;
+}
+
+/* Estilos para el formulario de edición */
+.edit-form {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.edit-form label {
+  font-weight: bold;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="number"],
+.edit-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.edit-form textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.edit-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.edit-form button:hover {
+  background-color: #45a049;
+  .layout {
+    background-color: #fff;
+    color: #333;
+}
+
+.table-container {
     padding: 20px;
-  }
-  
-  .product-table {
+    min-height: 100%;
+}
+
+.product-table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  .product-table th,
-  .product-table td {
-    border: 1px solid #ccc; /* Borde gris claro */
-    padding: 8px;
+    margin-top: 20px; /* Ajusta el margen superior de la tabla */
+}
+
+.product-table th,
+.product-table td {
+    border: 1px solid #ccc;
+    padding: 12px;
     text-align: center;
-  }
-  
-  .product-table th {
-    background-color: #f2f2f2; /* Fondo gris claro para las cabeceras */
-  }
-  
-  .product-table img {
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.product-table img {
     max-width: 50px;
-  }
-  
-  .edit-form {
-    padding: 20px;
-  }
-  
- 
+    border-radius: 50%;
+}
+
+/* Estilo para las filas de la tabla */
+.product-table tr {
+    border-bottom: 1px solid #ddd; /* Borde inferior entre filas */
+}
+
+/* Estilo para la última fila de la tabla */
+.product-table tr:last-child {
+    border-bottom: none; /* Elimina el borde inferior de la última fila */
+}
+}

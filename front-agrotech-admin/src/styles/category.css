@@ -1,3 +1,17 @@
-.container-sidebar{
-    display: flex;
+.nav-category {
+    width: 100%;
 }
+
+.container-category {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background-color: #a6a6a6;
+}
+ .container-sidebar-category{
+    min-width: 250px;
+    border-color: black solid 1px;
+ }
+
