@@ -34,32 +34,26 @@ export const getProductById = async (id) => {
     }
 }
 
-export const addProduct = async (productAdd) => {
-    const dataToSend = {
-        amount: Number(productAdd.amount),
-        category: productAdd.category,
-        
-        description: productAdd.description,
-        images: productAdd.images,
-        product: productAdd.product,
-        price:Number( productAdd.price)
-    };
+export const addProduct = async (productData) => {
     try {
-        const res = await fetch(urlProducts, {
+        const res = await fetch('http://localhost:3000/product', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataToSend)
+            body: productData
         });
-        console.log(dataToSend);
 
-        if (!res.ok) throw new Error(`Response not OK`)
-        const parsed = res.json()
-        window.location.reload();
-        return parsed;
+        if (!res.ok) {
+            throw new Error('Response not OK');
+        }
+
+        const data = await res.json();
+        window.location.reload()
+        return data;
     } catch (err) {
-        throw new Error(err);
+        console.error('Error en addProduct:', err);
+        throw err;
     }
-}
+};
+
 
 export const deleteProduct = async (product) => {
     const productDelete= product;

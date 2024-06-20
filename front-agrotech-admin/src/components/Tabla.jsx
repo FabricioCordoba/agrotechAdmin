@@ -56,8 +56,14 @@ function Tabla({ products }) {
 
     const handleChangeAdd = (e) => {
         e.preventDefault();
-        setProductAdd(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value, files } = e.target;
+        if (files) {
+            setProductAdd(prev => ({ ...prev, [name]: files[0] }));
+        } else {
+            setProductAdd(prev => ({ ...prev, [name]: value }));
+        }
     };
+    
 
     const handleAddClick = (productAdd) => {
         setProductAdd(productAdd);
@@ -69,8 +75,19 @@ function Tabla({ products }) {
     };
 
     const confirmAdd = async () => {
-        await addProduct(productAdd);
+        const formData = new FormData();
+        for (const key in productAdd) {
+            formData.append(key, productAdd[key]);
+        }
+    
+        try {
+            await addProduct(formData);
+            modalAddProductRef.current.close();
+        } catch (error) {
+            console.error('Error al agregar producto:', error);
+        }
     };
+    
 
     const handleAddCsv = () => {
         modalCsvRef.current.showModal();
@@ -286,7 +303,7 @@ function Tabla({ products }) {
                             onChange={handleChangeAdd}
                         />
                         <input
-                            type="text"
+                            type="file"
                             name="images"
                             placeholder='Imagen'
                             className='produc-edeeit-img'
