@@ -21,11 +21,7 @@ function Nav() {
         <>
             <div className="container-nav">
                 <Logo />
-                <div className="container-barra-searcha">
-                    <input className="input-search" placeholder="Buscar producto" />
-                    <GoSearch />
-
-                </div>
+               
                 <nav className="container-list">
                     <ul className='navList'>
 

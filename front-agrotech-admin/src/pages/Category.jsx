@@ -5,6 +5,8 @@ import Nav from '../components/Nav.jsx';
 import { ProductContext } from '../context/ProductContext.jsx';
 import Footer from '../components/Footer.jsx';
 import Sidebar from '../components/Sidebar.jsx';
+import "../styles/category.css";
+
 
 function Category() {
 
@@ -23,19 +25,19 @@ function Category() {
 
     return (
         <>
+        <div className='nav-category'>
             <Nav />
-            <div className='container-sidebar'>
-            <Sidebar/>
-
-            <div className="container-card-category">
-                 <Tabla  products={productsByCategory} />
+        </div>
+        <div className="container-category">
+            <div className='container-sidebar-category'>
+                <Sidebar />
             </div>
+            <div className="content-category">
+                <Tabla products={productsByCategory} />
             </div>
-            
-
-            <Footer />
-        </>
-
+        </div>
+        <Footer />
+    </>
 
     );
 }
