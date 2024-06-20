@@ -28,13 +28,28 @@ function Tabla({ products }) {
 
     const handleChangeEdit = (e) => {
         e.preventDefault();
-        setProductUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }));
+        const { name, value, files } = e.target;
+        if (files && files.length > 0) {
+            setProductUpdate(prev => ({ ...prev, [name]: files[0] }));
+        } else {
+            setProductUpdate(prev => ({ ...prev, [name]: value }));
+        }
     };
-
+    
     const handleSaveClick = async () => {
-        await updateProductById(productUpdate.idProduct, productUpdate);
+        const formData = new FormData();
+        for (const key in productUpdate) {
+            formData.append(key, productUpdate[key]);
+        }
+    
+        try {
+            await updateProductById(productUpdate.idProduct, formData);
+           
+        } catch (error) {
+            console.error('Error al actualizar producto:', error);
+        }
     };
-
+    
     const handleEditClick = (producto) => {
         setProductUpdate(producto);
         modalEdit.showModal();
