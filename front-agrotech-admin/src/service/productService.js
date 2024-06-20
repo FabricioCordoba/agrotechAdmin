@@ -44,7 +44,6 @@ export const addProduct = async (productData) => {
         if (!res.ok) {
             throw new Error('Response not OK');
         }
-
         const data = await res.json();
         window.location.reload()
         return data;
@@ -53,7 +52,6 @@ export const addProduct = async (productData) => {
         throw err;
     }
 };
-
 
 export const deleteProduct = async (product) => {
     const productDelete= product;
@@ -72,43 +70,26 @@ export const deleteProduct = async (product) => {
 }
 
 
-export const updateProductById = async (id, updatedProduct) => {
+export const updateProductById = async (idProduct, productData) => {
     try {
-        // Crear un nuevo objeto con los campos deseados
-        const dataToSend = {
-            amount: Number(updatedProduct.amount),
-            category: updatedProduct.category,
-            codeProduct: updatedProduct.codeProduct,
-            description: updatedProduct.description,
-            images: updatedProduct.images,
-            product: updatedProduct.product,
-            price: updatedProduct.price
-        };
-
-        const res = await fetch(`${urlProducts}/${id}`, {
+        const res = await fetch(`http://localhost:3000/product/${idProduct}`, {
             method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(dataToSend),
+            body: productData
         });
-        console.log("PRODUCTO NUEVO", dataToSend);
-        const product = await res.json();
-        return product;
+
+        if (!res.ok) {
+            throw new Error('Response not OK');
+        }
+        const data = await res.json();
+        window.location.reload()
+        return data;
     } catch (err) {
-        throw new Error(err);
+        console.error('Error en updateProductById:', err);
+        throw err;
     }
-}
+};
 
 
-export const itemsInvtry = ['Tranquera', 'ropa trabajo', 'Ferretería'];
 
-export const getInvtryByItem = async (category) => {
-    const res = await fetch(urlProducts)
-    const products = await res.json();
-    const productsCategory = products.filter((product) => product.category === category)
-    if (!productsCategory.length) throw new Error(`No hay ${category} en stock`)
-    return productsCategory;
-}
 
 
