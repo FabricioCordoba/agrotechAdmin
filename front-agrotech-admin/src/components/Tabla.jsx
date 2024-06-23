@@ -108,31 +108,41 @@ function Tabla({ products }) {
         modalCsvRef.current.showModal();
     };
 
+    const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
+
     const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        setFile(selectedFile);
+      const file = event.target.files[0]; // Obtener el primer archivo seleccionado por el usuario
+      setArchivoSeleccionado(file); // Actualizar el estado con el archivo seleccionado
     };
-
+  
     const handleUpload = async () => {
-        try {
-            const formData = new FormData();
-            formData.append('file', file);
-
-            const response = await fetch('http://localhost:3000/product/upload', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('Error al cargar el archivo');
-            }
-
-            await response.json();
-        } catch (error) {
-            console.error('Error al cargar el archivo:', error);
+        if (!archivoSeleccionado) {
+          console.error('No se ha seleccionado ningún archivo.');
+          return;
         }
-    };
-
+    console.log(archivoSeleccionado);
+        const formData = new FormData();
+        formData.append('file', archivoSeleccionado);
+    
+        try {
+          const response = await fetch('http://localhost:3000/product/upload', {
+            method: 'POST',
+            body: formData,
+          });
+   console.log(formData);
+          if (!response.ok) {
+            throw new Error('Error al cargar el archivo');
+          }
+    
+          const data = await response.json();
+          console.log('Archivo cargado correctamente:', data);
+          // Aquí puedes manejar la respuesta del servidor si es necesario
+        } catch (error) {
+          console.error('Error al cargar el archivo:', error);
+          // Aquí puedes manejar el error si es necesario
+        }
+      };
+    
     const cancelAddCsvModal = () => {
         modalCsvRef.current.close();
     };
@@ -236,7 +246,7 @@ function Tabla({ products }) {
                             onChange={handleChangeEdit}
                             value={productUpdate.category}
                         >
-                            <option value="Ferretería">Ferretería</option>
+                            <option value="Ferreteria">Ferretería</option>
                             <option value="Ropa de trabajo">Ropa de trabajo</option>
                             <option value="Tranqueras">Tranqueras</option>
                             <option value="Repuestos agricolas">Repuestos agricolas</option>
@@ -298,7 +308,7 @@ function Tabla({ products }) {
                             name="category"
                             onChange={handleChangeAdd}
                         >
-                            <option value="Ferretería">Ferretería</option>
+                            <option value="Ferreteria">Ferretería</option>
                             <option value="Ropa de trabajo">Ropa de trabajo</option>
                             <option value="Tranqueras">Tranqueras</option>
                             <option value="Repuestos agricolas">Repuestos agricolas</option>
