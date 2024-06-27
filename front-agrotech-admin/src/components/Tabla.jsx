@@ -165,12 +165,12 @@ function Tabla({ products }) {
     );
 
     return (
-        <section className='layout'>
+        <div className='general-table'>
             <div className="table-container">
                 <h1>Lista de Productos</h1>
-                <div>
-                    <button onClick={() => handleAddClick(productAdd)}>Agregar Producto</button>
-                    <button onClick={handleAddCsv}>Agregar CSV</button>
+                <div className='btn-adds'>
+                    <button className='btn-add-product' onClick={() => handleAddClick(productAdd)}>Agregar Producto</button>
+                    <button className='btn-add-csv' onClick={handleAddCsv}>Agregar CSV</button>
                 </div>
                 <table className="product-table">
                     <thead>
@@ -270,16 +270,16 @@ function Tabla({ products }) {
                             name='images'
                             onChange={handleChangeEdit}
                         />
-                        <button onClick={handleSaveClick}>Guardar</button>
-                        <button>Cancelar</button>
+                        <button className='btn-edit-guardar' onClick={handleSaveClick}>Guardar</button>
+                        <button className='btn-edi-cancelar'>Cancelar</button>
                     </form>
                 </dialog>
             )}
             {productUpdate && (
-                <dialog ref={modalDeleteRef} id='modalDelete'>
+                <dialog ref={modalDeleteRef} id='modalDelete' className='modal-delete-product'>
                     <p>¿Desea eliminar el producto {productUpdate.product}?</p>
-                    <button onClick={confirmDelete}>Aceptar</button>
-                    <button onClick={cancelDeleteModal}>Cancelar</button>
+                    <button className='btn-delete-aceptar' onClick={confirmDelete}>Aceptar</button>
+                    <button className='btn-delete-cancelar' onClick={cancelDeleteModal}>Cancelar</button>
                 </dialog>
             )}
             {products && (
@@ -331,11 +331,11 @@ function Tabla({ products }) {
                             type="file"
                             name="images"
                             placeholder='Imagen'
-                            className='produc-edeeit-img'
+                            className='produc-edit-img'
                             onChange={handleChangeAdd}
                         />
-                        <button onClick={confirmAdd}>Guardar</button>
-                        <button onClick={cancelAddModal}>Cancelar</button>
+                        <button className='btn-modal-add-product-aceptar' onClick={confirmAdd}>Guardar</button>
+                        <button className='btn-modal-add-product-cancelar' onClick={cancelAddModal}>Cancelar</button>
                     </form>
                 </dialog>
             )}
@@ -343,11 +343,11 @@ function Tabla({ products }) {
                 <form action="" method="dialog" id="formAddCsv">
                     <input type="file" onChange={handleFileChange} />
                     <p>Subi un archivo CSV </p>
-                    <button onClick={handleUpload}>Aceptar</button>
-                    <button onClick={cancelAddCsvModal}>Cancelar</button>
+                    <button className='btn-modal-add-csv-aceptar' onClick={handleUpload}>Aceptar</button>
+                    <button className='btn-modal-add-csv-cancelar' onClick={cancelAddCsvModal}>Cancelar</button>
                 </form>
             </dialog>
-        </section>
+        </div>
     );
 }
 
