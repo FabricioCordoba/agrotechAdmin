@@ -105,20 +105,6 @@ h1{
   resize: vertical;
 }
 
-.edit-form button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  background-color: #126606;
-  color: white;
-  font-size: 14px;
-  margin: 0 5px;
-}
-.edit-form button:hover {
-  background-color:  #218838;
-}
-
 dialog {
   width: 50%;
   padding: 20px;
