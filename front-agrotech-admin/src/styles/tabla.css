@@ -1,23 +1,63 @@
-
-.layout {
+.general-table {
   width: 100%;
   background-color: #fff;
   color: #333;
-  padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #a6a6a6;
 }
 
-/* Estilos para la tabla de productos */
+h1{
+  text-align: center;
+  text-decoration: underline;
+}
 .table-container {
-  padding: 20px;
   overflow-x: auto;
+  background-color: white;
 }
 
 .product-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+}
+.btn-add-product {
+  width: 40%;
+  padding: 10px;
+  background-color: #126606;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-add-product:hover {
+  background-color: #218838;
+}
+
+.btn-adds {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+
+.btn-add-csv {
+  width: 40%;
+  padding: 10px;
+  background-color: #126606;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.btn-add-csv:hover {
+  background-color: #218838;
 }
 
 .product-table th,
@@ -33,10 +73,7 @@
   text-transform: uppercase;
 }
 
-.produc-edeeit-img {
-  max-width: 50px;
-  border-radius: 5%;
-}
+
 
 /* Estilos para el formulario de edición */
 .edit-form {
@@ -69,24 +106,57 @@
 }
 
 .edit-form button {
-  background-color: #4CAF50;
-  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  background-color: #126606;
+  color: white;
   font-size: 14px;
+  margin: 0 5px;
+}
+.edit-form button:hover {
+  background-color:  #218838;
 }
 
-.edit-form button:hover {
-  background-color: #45a049;
-  .layout {
-    background-color: #fff;
-    color: #333;
+dialog {
+  width: 50%;
+  padding: 20px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+dialog h2, dialog p {
+  margin: 0 0 20px;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+}
+dialog input[type="text"],
+dialog input[type="number"],
+dialog select,
+dialog input[type="file"] {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.modal-delete-product{
+ text-align: center;
+ font-size: 26px;
+}
+
 
 .table-container {
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     min-height: 100%;
 }
 
@@ -111,7 +181,7 @@
 
 .product-table img {
     max-width: 50px;
-    border-radius: 50%;
+    border-radius: 5%;
 }
 
 /* Estilo para las filas de la tabla */
@@ -123,4 +193,99 @@
 .product-table tr:last-child {
     border-bottom: none; /* Elimina el borde inferior de la última fila */
 }
+.btn-delete-aceptar{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #126606;
+  color: white;
+  font-size: 14px;
+  margin: 0 5px;
+  width: 40%;
+  margin-top: 10px;
 }
+
+.btn-delete-cancelar{
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+  width: 40%;
+  margin-top: 10px;
+}
+.btn-edit-guardar, 
+.btn-modal-add-product-aceptar,
+.btn-modal-add-csv-aceptar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #126606;
+  color: white;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.btn-edit-guardar:hover,
+.btn-delete-aceptar:hover,
+.btn-modal-add-product-aceptar:hover,
+.btn-modal-add-csv-aceptar:hover {
+  background-color: #218838;
+}
+
+.btn-edi-cancelar,
+.btn-modal-add-product-cancelar,
+.btn-modal-add-csv-cancelar {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+
+  margin-top: 10px;
+}
+
+.btn-edi-cancelar:hover,
+.btn-delete-cancelar:hover,
+.btn-modal-add-product-cancelar:hover,
+.btn-modal-add-csv-cancelar:hover {
+  background-color: #c82333;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #126606;
+  color: white;
+  font-size: 14px;
+  margin: 0 5px;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+}
+
+.pagination span {
+  margin: 0 10px;
+  font-size: 16px;
+} 
+
+
+
