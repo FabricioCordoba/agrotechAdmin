@@ -81,6 +81,9 @@ function TablaUser({ clients }) {
         <>
             <div className='general-tabla-users'>
                 <div className='table-container'>
+                    <div>
+                        <h1>Listado de clientes</h1>
+                    </div>
                     <input
                     className='input-buscar'
                         type="text"
