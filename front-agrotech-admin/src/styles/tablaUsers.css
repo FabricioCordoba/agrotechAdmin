@@ -4,7 +4,7 @@
     color: #333;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #a6a6a6;
+   
   }
   .input-buscar{
     text-align: center;
@@ -41,15 +41,6 @@
     text-transform: uppercase;
   }
   
- 
-  
-  .edit-form {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
   
   .edit-form input[type="text"] {
     width: 100%;
@@ -104,8 +95,6 @@
     width: 100%;
   }
   
- 
-  
   .dialog .btn-edit-cancelar-users:hover {
     background-color:#c82333;
   }
@@ -139,8 +128,6 @@
     width: 40%;
     margin-top: 10px;
   }
-  
- 
   
   .dialog .btn-delete-cancelar:hover {
     background-color:#c82333;

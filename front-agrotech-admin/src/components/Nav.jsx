@@ -12,10 +12,7 @@ function Nav() {
     const { user, handleLogout } = useContext(UserContext);
     const navigate = useNavigate();
 
-    function idUpdate(e) {
-        e.preventDefault()
-        navigate(`/user-update/${user.id}`)
-    }
+   
     const userName = user ? user.name : '';
     return (
         <>
@@ -25,7 +22,7 @@ function Nav() {
                 <nav className="container-list">
                     <ul className='navList'>
 
-                        <Link to={""} onClick={idUpdate}><li>{userName}</li></Link>
+                        <li>{userName}</li>
                         <Link to={"/Register"}><li>Registrar Administrador</li></Link>
                         <Link to={"/"}><li onClick={handleLogout}>Cerrar Sesion</li></Link>
 
