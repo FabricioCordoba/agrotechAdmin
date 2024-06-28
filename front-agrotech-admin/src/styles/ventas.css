@@ -1,0 +1,82 @@
+.general-ventas {
+    width: 100%;
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    margin-left: 100px;
+   
+  }
+  
+  .general-ventas h1 {
+    text-align: center;
+    text-decoration: underline;
+  }
+  
+  .input-filtros-tiempo, .filtro-por-producto, .filtro-dia, .filtro-semana, .flitro-mes {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;}
+
+  
+  .input-filtros-tiempo label, .filtro-por-producto label, .filtro-dia label, .filtro-semana label, .flitro-mes label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+
+  }
+  
+  .input-filtros-tiempo select, .filtro-por-producto input, .filtro-dia input, .filtro-semana input, .flitro-mes input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .recaudado {
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+  }
+    
+  .tabla-ventas {
+    overflow-x: auto;
+    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+   
+  }
+  
+  .tabla-ventas th{
+    border-color: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .tabla-ventas td {
+    border-color: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .tabla-ventas th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: #ccc solid 1px;
+  }
+  
+  .tabla-ventas tr{
+    border-bottom: 1px solid #ddd; 
+  }
+  .tabla-ventas tr:last-child {
+    border-bottom: none; /* Elimina el borde inferior de la última fila */
+}
+.celda{
+    border: #ccc solid 1px;
+
+}
