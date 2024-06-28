@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { startOfDay, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from 'date-fns';
 import { UserContext } from "../context/UserContext";
+import "../styles/ventas.css";
 
 const Ventas = () => {
     const { clients } = useContext(UserContext);
@@ -13,6 +14,8 @@ const Ventas = () => {
     const [filtroFechaInicio, setFiltroFechaInicio] = useState(new Date());
     const [filtroFechaFin, setFiltroFechaFin] = useState(new Date());
     const [totalVentas, setTotalVentas] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productosPerPage = 10;
 
     useEffect(() => {
         const fetchVentas = async () => {
@@ -68,8 +71,8 @@ const Ventas = () => {
 
         // Aplicar filtro por producto después del filtro de tiempo
         if (filtroProducto) {
-            ventasFiltradas = ventasFiltradas.filter(venta => 
-                venta.invoiceDetails.some(detalle => 
+            ventasFiltradas = ventasFiltradas.filter(venta =>
+                venta.invoiceDetails.some(detalle =>
                     detalle.product.product.toLowerCase().includes(filtroProducto.toLowerCase())
                 )
             );
@@ -81,6 +84,7 @@ const Ventas = () => {
 
         setTotalVentas(total);
         setFilteredVentas(ventasFiltradas);
+        setCurrentPage(1); // Resetear la página actual cuando se aplica un nuevo filtro
     };
 
     const handleFiltroProductoChange = (event) => {
@@ -99,11 +103,35 @@ const Ventas = () => {
         setFiltroFechaFin(localDate);
     };
 
+    const totalProducts = filteredVentas.reduce((acc, venta) => acc + venta.invoiceDetails.length, 0);
+    const totalPages = Math.ceil(totalProducts / productosPerPage);
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const paginatedVentas = filteredVentas.reduce((acc, venta) => {
+        venta.invoiceDetails.forEach(detalle => {
+            if (detalle.product.product.toLowerCase().includes(filtroProducto.toLowerCase())) {
+                acc.push({ ...detalle, invoiceDate: venta.invoiceDate });
+            }
+        });
+        return acc;
+    }, []).slice((currentPage - 1) * productosPerPage, currentPage * productosPerPage);
+
     return (
         <>
-            <div>
+            <div className='general-ventas'>
                 <h1>Registro de Ventas</h1>
-                <div>
+                <div className='input-filtros-tiempo'>
                     <label htmlFor="filtroTiempo">Filtrar por Tiempo:</label>
                     <select id="filtroTiempo" value={filtroTiempo} onChange={(e) => setFiltroTiempo(e.target.value)}>
                         <option value="todos">Todos</option>
@@ -112,18 +140,18 @@ const Ventas = () => {
                         <option value="mes">Mes</option>
                     </select>
                 </div>
-                <div>
+                <div className='filtro-por-producto'>
                     <label htmlFor="filtroProducto">Filtrar por Producto:</label>
                     <input type="text" id="filtroProducto" value={filtroProducto} onChange={handleFiltroProductoChange} />
                 </div>
                 {filtroTiempo === 'dia' && (
-                    <div>
+                    <div className='filtro-dia'>
                         <label htmlFor="fechaInicio">Fecha:</label>
                         <input type="date" id="fechaInicio" value={filtroFechaInicio.toISOString().substring(0, 10)} onChange={handleFechaInicioChange} />
                     </div>
                 )}
                 {filtroTiempo === 'semana' && (
-                    <div>
+                    <div className='filtro-semana'>
                         <label htmlFor="fechaInicio">Inicio de semana:</label>
                         <input type="date" id="fechaInicio" value={filtroFechaInicio.toISOString().substring(0, 10)} onChange={handleFechaInicioChange} />
                         <label htmlFor="fechaFin">Fin de semana:</label>
@@ -131,13 +159,18 @@ const Ventas = () => {
                     </div>
                 )}
                 {filtroTiempo === 'mes' && (
-                    <div>
+                    <div className='flitro-mes'>
                         <label htmlFor="fechaInicio">Mes y Año:</label>
                         <input type="month" id="fechaInicio" value={filtroFechaInicio.toISOString().substring(0, 7)} onChange={handleFechaInicioChange} />
                     </div>
                 )}
-                <table>
-                    <thead>
+                {filtroTiempo !== 'todos' && (
+                    <div className='recaudado'>
+                        <h3>Total recaudado: $ {Intl.NumberFormat('es-ES').format(totalVentas)}</h3>
+                    </div>
+                )}
+                <table className='tabla-ventas'>
+                    <thead >
                         <tr>
                             <th>Fecha de Venta</th>
                             <th>Producto</th>
@@ -145,27 +178,24 @@ const Ventas = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredVentas.map((venta) => (
-                            venta.invoiceDetails
-                                .filter(detalle => detalle.product.product.toLowerCase().startsWith(filtroProducto.toLowerCase()))
-                                .map((detalle, index) => (
-                                    <tr key={`${venta.idInvoice}-${index}`}>
-                                        <td>{new Date(venta.invoiceDate).toLocaleDateString()}</td>
-                                        <td>{detalle.product.product}</td>
-                                        <td>{detalle.amount_sold}</td>
-                                    </tr>
-                                ))
+                        {paginatedVentas.map((detalle, index) => (
+                            <tr key={`${detalle.id}-${index}`}>
+                                <td className='celda'>{new Date(detalle.invoiceDate).toLocaleDateString()}</td>
+                                <td className='celda'>{detalle.product.product}</td>
+                                <td className='celda'>{detalle.amount_sold}</td>
+                            </tr>
                         ))}
                     </tbody>
                 </table>
-            </div>
-            {filtroTiempo !== 'todos' && (
-                <div>
-                    <h3>Total recaudado: ${totalVentas}</h3>
+                <div className="pagination">
+                    <button onClick={handlePreviousPage} disabled={currentPage === 1}>Anterior</button>
+                    <span>{currentPage} de {totalPages}</span>
+                    <button onClick={handleNextPage} disabled={currentPage === totalPages}>Siguiente</button>
                 </div>
-            )}
+            </div>
         </>
     );
 };
 
-export default Ventas
+export default Ventas;
+    
