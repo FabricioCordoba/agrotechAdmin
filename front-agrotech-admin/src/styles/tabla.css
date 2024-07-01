@@ -158,6 +158,9 @@ dialog input[type="file"] {
     max-width: 50px;
     border-radius: 5%;
 }
+.product-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Color de fondo para las filas pares */
+}
 
 /* Estilo para las filas de la tabla */
 .product-table tr {

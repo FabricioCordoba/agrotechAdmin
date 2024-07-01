@@ -22,6 +22,10 @@
     margin-right: 20px;
 }
 
+.tabla-historial tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo para las filas pares */
+  }
+
 .tabla-historial th,
 .tabla-historial td {
     border: 1px solid #ccc;
