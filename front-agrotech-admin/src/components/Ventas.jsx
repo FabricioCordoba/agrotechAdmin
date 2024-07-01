@@ -123,8 +123,11 @@ const Ventas = () => {
             if (detalle.product.product.toLowerCase().includes(filtroProducto.toLowerCase())) {
                 acc.push({ ...detalle, invoiceDate: venta.invoiceDate });
             }
+            
         });
+
         return acc;
+
     }, []).slice((currentPage - 1) * productosPerPage, currentPage * productosPerPage);
 
     return (
@@ -166,7 +169,7 @@ const Ventas = () => {
                 )}
                 {filtroTiempo !== 'todos' && (
                     <div className='recaudado'>
-                        <h3>Total recaudado: $ {Intl.NumberFormat('es-ES').format(totalVentas)}</h3>
+                        <h3>Total recaudado: {Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(totalVentas)}</h3>
                     </div>
                 )}
                 <table className='tabla-ventas'>
@@ -175,14 +178,18 @@ const Ventas = () => {
                             <th>Fecha de Venta</th>
                             <th>Producto</th>
                             <th>Cantidad Vendida</th>
+                            <th>Precio</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         {paginatedVentas.map((detalle, index) => (
+
                             <tr key={`${detalle.id}-${index}`}>
                                 <td className='celda'>{new Date(detalle.invoiceDate).toLocaleDateString()}</td>
                                 <td className='celda'>{detalle.product.product}</td>
                                 <td className='celda'>{detalle.amount_sold}</td>
+                                <td className='celda'>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(detalle.product.price)}</td>
                             </tr>
                         ))}
                     </tbody>
