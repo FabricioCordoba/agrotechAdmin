@@ -41,6 +41,9 @@
     text-transform: uppercase;
   }
   
+ .clients-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Color de fondo para las filas pares */
+  }
   
   .edit-form input[type="text"] {
     width: 100%;
