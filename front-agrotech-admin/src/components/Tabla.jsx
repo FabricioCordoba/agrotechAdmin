@@ -192,7 +192,7 @@ function Tabla({ products }) {
                                 <td>{product.codeProduct}</td>
                                 <td>{product.product}</td>
                                 <td>{product.description}</td>
-                                <td>${product.price}</td>
+                                <td>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price)}</td>
                                 <td>{product.category}</td>
 
                                 <td style={{ color: product.amount <= 5 ? 'red' : 'black', fontSize: product.amount <= 5 ? 30 : '20px'  }}>

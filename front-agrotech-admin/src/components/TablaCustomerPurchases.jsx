@@ -72,15 +72,15 @@ const TablaCustomerPurchases = ({ idUser }) => {
                                     {paginatedInvoices.map((invoice) => (
                                         <tr key={invoice.idInvoice}>
                                             <td>{new Date(invoice.invoiceDate).toLocaleDateString()}</td>
-                                            <td>${invoice.total_without_iva}</td>
-                                            <td>${invoice.total_with_iva}</td>
+                                            <td>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(invoice.total_without_iva)}</td>
+                                            <td>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(invoice.total_with_iva)}</td>
                                             <td>
                                                 <ul>
                                                     {invoice.invoiceDetails.map((detail) => (
                                                         <li key={detail.id}>
                                                             Producto: {detail.product.product} -
                                                             Descripción: {detail.product.description} -
-                                                            Precio: ${detail.product.price} -
+                                                            Precio:{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(detail.price_at_purchase)} -
                                                             Cantidad: {detail.amount_sold}
                                                         </li>
                                                     ))}
