@@ -81,7 +81,7 @@ export const updateUserById = async (id, updatedUser) => {
             lastname: updatedUser.lastname,
             phone: updatedUser.phone,
             email: updatedUser.email,
-        
+            address: updatedUser.address 
         
         };
         const res = await fetch(`${url_users}/${id}`, {
