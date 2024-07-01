@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import Footer from '../components/Footer.jsx';
 import { jwtDecode } from "jwt-decode"
+import "../styles/login.css"
+import { Logo } from '../components/Logo.jsx';
 
 function Login() {
 
@@ -47,15 +49,18 @@ function Login() {
     };
     return (
         <>
-      
+        <div className='logo-login'>
+        <Logo/>
+
+        </div>
             <div className="container-form-login">
-                <form className="form" onSubmit={handleSubmit}>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" name='email' id='email' placeholder='Ingrese su Email' onChange={handleChange} />
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" name='password' id='password' placeholder='Ingrese su Contraseña' onChange={handleChange} />
+                <form className="form-login" onSubmit={handleSubmit}>
+                    <label htmlFor="email" className='label-login'>Email</label>
+                    <input type="text" name='email' id='email' className='input-login' placeholder='Ingrese su Email' onChange={handleChange} />
+                    <label htmlFor="password" className='label-login'>Contraseña</label>
+                    <input type="password" name='password' id='password' className='input-login' placeholder='Ingrese su Contraseña' onChange={handleChange} />
                     <p id="notificacion" ref={notificacionRef}></p>
-                    <button type='submit'>Iniciar sesión</button>
+                    <button className='btn-login' type='submit'>Iniciar sesión</button>
                 </form>
             </div>
             <div>

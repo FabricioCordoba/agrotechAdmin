@@ -18,6 +18,7 @@ function TablaUser({ clients }) {
         lastname: user.lastname,
         phone: user.phone,
         email: user.email,
+        address: user.address
     });
 
     const [filtroApellido, setFiltroApellido] = useState('');
@@ -98,6 +99,7 @@ function TablaUser({ clients }) {
                                 <th>Nombre</th>
                                 <th>Teléfono</th>
                                 <th>Email</th>
+                                <th>Dirección</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                                 <th>Historial de compra</th>
@@ -110,6 +112,7 @@ function TablaUser({ clients }) {
                                     <td>{user.name}</td>
                                     <td>{user.phone}</td>
                                     <td>{user.email}</td>
+                                    <td>{user.address}</td>
                                     <td>
                                         <button className='button-edit' onClick={() => handleEditClick(user)}><AiFillEdit /></button>
                                     </td>
@@ -156,6 +159,12 @@ function TablaUser({ clients }) {
                                     type="text"
                                     name="email"
                                     value={clientUpdate.email}
+                                    onChange={handleChangeEditClient}
+                                />
+                                  <input
+                                    type="text"
+                                    name="address"
+                                    value={clientUpdate.address}
                                     onChange={handleChangeEditClient}
                                 />
                                 <button className='btn-edit-guardar-users' onClick={handleSaveClick}>Guardar</button>

@@ -35,21 +35,21 @@ function Tabla({ products }) {
             setProductUpdate(prev => ({ ...prev, [name]: value }));
         }
     };
-    
+
     const handleSaveClick = async () => {
         const formData = new FormData();
         for (const key in productUpdate) {
             formData.append(key, productUpdate[key]);
         }
-    
+
         try {
             await updateProductById(productUpdate.idProduct, formData);
-           
+
         } catch (error) {
             console.error('Error al actualizar producto:', error);
         }
     };
-    
+
     const handleEditClick = (producto) => {
         setProductUpdate(producto);
         modalEdit.showModal();
@@ -78,7 +78,7 @@ function Tabla({ products }) {
             setProductAdd(prev => ({ ...prev, [name]: value }));
         }
     };
-    
+
 
     const handleAddClick = (productAdd) => {
         setProductAdd(productAdd);
@@ -94,7 +94,7 @@ function Tabla({ products }) {
         for (const key in productAdd) {
             formData.append(key, productAdd[key]);
         }
-    
+
         try {
             await addProduct(formData);
             modalAddProductRef.current.close();
@@ -102,7 +102,7 @@ function Tabla({ products }) {
             console.error('Error al agregar producto:', error);
         }
     };
-    
+
 
     const handleAddCsv = () => {
         modalCsvRef.current.showModal();
@@ -111,38 +111,38 @@ function Tabla({ products }) {
     const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
 
     const handleFileChange = (event) => {
-      const file = event.target.files[0]; // Obtener el primer archivo seleccionado por el usuario
-      setArchivoSeleccionado(file); // Actualizar el estado con el archivo seleccionado
+        const file = event.target.files[0]; // Obtener el primer archivo seleccionado por el usuario
+        setArchivoSeleccionado(file); // Actualizar el estado con el archivo seleccionado
     };
-  
+
     const handleUpload = async () => {
         if (!archivoSeleccionado) {
-          console.error('No se ha seleccionado ningún archivo.');
-          return;
+            console.error('No se ha seleccionado ningún archivo.');
+            return;
         }
-    console.log(archivoSeleccionado);
+        console.log(archivoSeleccionado);
         const formData = new FormData();
         formData.append('file', archivoSeleccionado);
-    
+
         try {
-          const response = await fetch('http://localhost:3000/product/upload', {
-            method: 'POST',
-            body: formData,
-          });
-   console.log(formData);
-          if (!response.ok) {
-            throw new Error('Error al cargar el archivo');
-          }
-    
-          const data = await response.json();
-          console.log('Archivo cargado correctamente:', data);
-          // Aquí puedes manejar la respuesta del servidor si es necesario
+            const response = await fetch('http://localhost:3000/product/upload', {
+                method: 'POST',
+                body: formData,
+            });
+            console.log(formData);
+            if (!response.ok) {
+                throw new Error('Error al cargar el archivo');
+            }
+
+            const data = await response.json();
+            console.log('Archivo cargado correctamente:', data);
+            // Aquí puedes manejar la respuesta del servidor si es necesario
         } catch (error) {
-          console.error('Error al cargar el archivo:', error);
-          // Aquí puedes manejar el error si es necesario
+            console.error('Error al cargar el archivo:', error);
+            // Aquí puedes manejar el error si es necesario
         }
-      };
-    
+    };
+
     const cancelAddCsvModal = () => {
         modalCsvRef.current.close();
     };
@@ -194,7 +194,11 @@ function Tabla({ products }) {
                                 <td>{product.description}</td>
                                 <td>${product.price}</td>
                                 <td>{product.category}</td>
-                                <td>{product.amount}</td>
+
+                                <td style={{ color: product.amount <= 5 ? 'red' : 'black', fontSize: product.amount <= 5 ? 30 : '20px'  }}>
+                                    {product.amount}
+                                </td>
+
                                 <td><img src={product.images} alt={product.product} width="50" /></td>
                                 <td>
                                     <button className='button-edit' onClick={() => handleEditClick(product)}><AiFillEdit /></button>
