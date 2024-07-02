@@ -9,9 +9,8 @@ export const UserProvider = ({ children }) => {
   const urlUsers = 'http://localhost:3000/user'
 
   const [clients, setClients] = useState([])
-
   const [user, setUser] = useState("null");
-
+  const [isLoggedIn, setIsloggenIn]= useState(false)
   const handleLogin = (loggedInUser) => {
     setUser(loggedInUser);
     localStorage.setItem('user', JSON.stringify(loggedInUser));
@@ -21,6 +20,8 @@ export const UserProvider = ({ children }) => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+      setIsloggenIn(true);
+
     }
   }, []);
 
@@ -51,7 +52,7 @@ export const UserProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ user, clients, handleLogin, handleLogout }}>
+    <UserContext.Provider value={{ user, clients, handleLogin, handleLogout,isLoggedIn, setIsloggenIn }}>
       {children}
     </UserContext.Provider>
   )
