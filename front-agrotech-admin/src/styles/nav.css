@@ -1,0 +1,43 @@
+/* src/styles/nav.css */
+
+.container-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #a6a6a6;
+    padding: 10px 20px;
+}
+
+.container-list {
+    display: flex;
+    align-items: center;
+}
+
+.navList {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.navList li {
+    padding: 10px 15px;
+    transition: background-color 0.3s ease;
+    color: black;
+    font-size: 20px;
+
+}
+
+.navList li:hover {
+    background-color: #706d6d;
+    cursor: pointer;
+    border-radius: 5px;
+    color: white;
+}
+
+.navList a {
+    color: #fff;
+    text-decoration: none;
+}
+
