@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import { addProduct, deleteProduct, updateProductById } from '../service/productService';
@@ -10,7 +10,8 @@ function Tabla({ products }) {
     const modalAddProductRef = useRef(null);
     const modalCsvRef = useRef(null);
     const [productAdd, setProductAdd] = useState();
-    const [file, setFile] = useState(null);
+    const [filtroProducto, setFiltroProducto] = useState('');
+
     const [productUpdate, setProductUpdate] = useState({
         idProduct: '',
         codeProduct: '',
@@ -44,7 +45,6 @@ function Tabla({ products }) {
 
         try {
             await updateProductById(productUpdate.idProduct, formData);
-
         } catch (error) {
             console.error('Error al actualizar producto:', error);
         }
@@ -79,7 +79,6 @@ function Tabla({ products }) {
         }
     };
 
-
     const handleAddClick = (productAdd) => {
         setProductAdd(productAdd);
         modalAddProductRef.current.showModal();
@@ -103,7 +102,6 @@ function Tabla({ products }) {
         }
     };
 
-
     const handleAddCsv = () => {
         modalCsvRef.current.showModal();
     };
@@ -111,8 +109,8 @@ function Tabla({ products }) {
     const [archivoSeleccionado, setArchivoSeleccionado] = useState(null);
 
     const handleFileChange = (event) => {
-        const file = event.target.files[0]; // Obtener el primer archivo seleccionado por el usuario
-        setArchivoSeleccionado(file); // Actualizar el estado con el archivo seleccionado
+        const file = event.target.files[0];
+        setArchivoSeleccionado(file);
     };
 
     const handleUpload = async () => {
@@ -120,7 +118,7 @@ function Tabla({ products }) {
             console.error('No se ha seleccionado ningún archivo.');
             return;
         }
-        console.log(archivoSeleccionado);
+
         const formData = new FormData();
         formData.append('file', archivoSeleccionado);
 
@@ -129,17 +127,15 @@ function Tabla({ products }) {
                 method: 'POST',
                 body: formData,
             });
-            console.log(formData);
+
             if (!response.ok) {
                 throw new Error('Error al cargar el archivo');
             }
 
             const data = await response.json();
             console.log('Archivo cargado correctamente:', data);
-            // Aquí puedes manejar la respuesta del servidor si es necesario
         } catch (error) {
             console.error('Error al cargar el archivo:', error);
-            // Aquí puedes manejar el error si es necesario
         }
     };
 
@@ -164,11 +160,27 @@ function Tabla({ products }) {
         currentPage * productsPerPage
     );
 
+    const handleFilterByProduct = (e) => {
+        setFiltroProducto(e.target.value.toLowerCase());
+    };
+
+    // Filtrar todos los productos basados en el filtroProducto
+    const filteredProducts = products.filter((product) =>
+        product.product.toLowerCase().includes(filtroProducto)
+    );
+
     return (
         <div className='general-table'>
             <div className="table-container">
                 <h1>Lista de Productos</h1>
                 <div className='btn-adds'>
+                    <input
+                        className='input-buscar'
+                        type="text"
+                        placeholder="Buscar producto"
+                        value={filtroProducto}
+                        onChange={handleFilterByProduct} // Manejar cambios en el input de búsqueda
+                    />
                     <button className='btn-add-product' onClick={() => handleAddClick(productAdd)}>Agregar Producto</button>
                     <button className='btn-add-csv' onClick={handleAddCsv}>Agregar CSV</button>
                 </div>
@@ -187,18 +199,16 @@ function Tabla({ products }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginatedProducts.map((product) => (
+                        {filteredProducts.map((product) => (
                             <tr key={product.idProduct}>
                                 <td>{product.codeProduct}</td>
                                 <td>{product.product}</td>
                                 <td>{product.description}</td>
                                 <td>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(product.price)}</td>
                                 <td>{product.category}</td>
-
-                                <td style={{ color: product.amount <= 5 ? 'red' : 'black', fontSize: product.amount <= 5 ? 30 : '20px'  }}>
+                                <td style={{ color: product.amount <= 5 ? 'red' : 'black', fontSize: product.amount <= 5 ? 30 : '20px' }}>
                                     {product.amount}
                                 </td>
-
                                 <td><img src={product.images} alt={product.product} width="50" /></td>
                                 <td>
                                     <button className='button-edit' onClick={() => handleEditClick(product)}><AiFillEdit /></button>
@@ -346,7 +356,7 @@ function Tabla({ products }) {
             <dialog ref={modalCsvRef} id='modalCsv'>
                 <form action="" method="dialog" id="formAddCsv">
                     <input type="file" onChange={handleFileChange} />
-                    <p>Subi un archivo CSV </p>
+                    <p>Subir archivo CSV</p>
                     <button className='btn-modal-add-csv-aceptar' onClick={handleUpload}>Aceptar</button>
                     <button className='btn-modal-add-csv-cancelar' onClick={cancelAddCsvModal}>Cancelar</button>
                 </form>
