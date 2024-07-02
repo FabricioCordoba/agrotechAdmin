@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaLocationDot,  FaPhone  } from "react-icons/fa6";
 import '../styles/footer.css'; 
-
+import React from "react";
 function Footer() {
   const gmailLink = "https://mail.google.com/mail/u/0/#inbox";
 

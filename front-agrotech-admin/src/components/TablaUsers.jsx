@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { updateUserById, deleteUser } from "../service/userService";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { UserContext } from "../context/UserContext";
@@ -13,12 +13,12 @@ function TablaUser({ clients }) {
     const modalEditRef = useRef(null);
 
     const [clientUpdate, setClientUpdate] = useState({
-        idUser: user.idUser,
-        name: user.name,
-        lastname: user.lastname,
-        phone: user.phone,
-        email: user.email,
-        address: user.address
+        idUser: user?.idUser || '',
+        name: user?.name || '',
+        lastname: user?.lastname || '',
+        phone: user?.phone || '',
+        email: user?.email || '',
+        address: user?.address || ''
     });
 
     const [filtroApellido, setFiltroApellido] = useState('');
@@ -26,14 +26,25 @@ function TablaUser({ clients }) {
     const clientsPerPage = 10;
     const totalPages = Math.ceil(clients.length / clientsPerPage);
 
+    useEffect(() => {
+        setClientUpdate({
+            idUser: user?.idUser || '',
+            name: user?.name || '',
+            lastname: user?.lastname || '',
+            phone: user?.phone || '',
+            email: user?.email || '',
+            address: user?.address || ''
+        });
+    }, [user]); // Update clientUpdate whenever user changes
+
     function handleChangeEditClient(e) {
         e.preventDefault();
         setClientUpdate(prev => ({ ...prev, [e.target.name]: e.target.value }));
     }
 
     const handleSaveClick = async () => {
-        const updatedclientResponse = await updateUserById(clientUpdate.idUser, clientUpdate);
-        return updatedclientResponse;
+        const updatedClientResponse = await updateUserById(clientUpdate.idUser, clientUpdate);
+        return updatedClientResponse;
     };
 
     const handleEditClick = (client) => {
@@ -41,8 +52,8 @@ function TablaUser({ clients }) {
         modalEditRef.current.showModal();
     };
 
-    const handleDeleteClick = (cliente) => {
-        setClientUpdate(cliente);
+    const handleDeleteClick = (client) => {
+        setClientUpdate(client);
         modalDeleteRef.current.showModal();
     };
 
@@ -86,7 +97,7 @@ function TablaUser({ clients }) {
                         <h1>Listado de clientes</h1>
                     </div>
                     <input
-                    className='input-buscar'
+                        className='input-buscar'
                         type="text"
                         placeholder="Buscar por apellido..."
                         value={filtroApellido}
@@ -161,7 +172,7 @@ function TablaUser({ clients }) {
                                     value={clientUpdate.email}
                                     onChange={handleChangeEditClient}
                                 />
-                                  <input
+                                <input
                                     type="text"
                                     name="address"
                                     value={clientUpdate.address}

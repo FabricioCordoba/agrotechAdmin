@@ -10,6 +10,7 @@ import VentasPage from "./pages/VentasPage";
 import { RutasProtegidas } from "./components/RutasProtegidas";
 import { UserContext } from "./context/UserContext";
 import { useContext } from "react";
+import React from "react";
 
 function App() {
   const { isLoggedIn } = useContext(UserContext);
