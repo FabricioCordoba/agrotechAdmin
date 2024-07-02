@@ -24,7 +24,7 @@ function Nav() {
 
                         <li>{userName}</li>
                         <Link to={"/Register"}><li>Registrar Administrador</li></Link>
-                        <Link to={"/"}><li onClick={handleLogout}>Cerrar Sesion</li></Link>
+                        <Link to={"/"}><li onClick={handleLogout}>Cerrar Sesión</li></Link>
 
                     </ul>
                 </nav>

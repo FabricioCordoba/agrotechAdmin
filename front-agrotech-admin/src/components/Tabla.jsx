@@ -253,15 +253,15 @@ function Tabla({ products }) {
                             <option value="Ferreteria">Ferretería</option>
                             <option value="Ropa de trabajo">Ropa de trabajo</option>
                             <option value="Tranqueras">Tranqueras</option>
-                            <option value="Repuestos agricolas">Repuestos agricolas</option>
+                            <option value="Repuestos agricolas">Repuestos agrícolas</option>
                             <option value="Equipamiento vehículos">Equipamiento vehículos</option>
-                            <option value="Pulverizacío">Pulverizacío</option>
+                            <option value="Pulverizacío">Pulverización</option>
                             <option value="Construcción">Construcción</option>
                             <option value="Infraestructura">Infraestructura</option>
-                            <option value="Energias renovables">Energias renovables</option>
+                            <option value="Energias renovables">Energías renovables</option>
                             <option value="Maquinaria agrícola">Maquinaria agrícola</option>
                             <option value="Forestación y Jardinería">Forestación y Jardinería</option>
-                            <option value="Agricultura de precision">Agricultura de precision</option>
+                            <option value="Agricultura de precision">Agricultura de precisión</option>
                         </select>
                         <input
                             type="number"
@@ -317,13 +317,13 @@ function Tabla({ products }) {
                             <option value="Tranqueras">Tranqueras</option>
                             <option value="Repuestos agricolas">Repuestos agricolas</option>
                             <option value="Equipamiento vehículos">Equipamiento vehículos</option>
-                            <option value="Pulverizacío">Pulverizacío</option>
+                            <option value="Pulverizacío">Pulverización</option>
                             <option value="Construcción">Construcción</option>
                             <option value="Infraestructura">Infraestructura</option>
-                            <option value="Energias renovables">Energias renovables</option>
+                            <option value="Energias renovables">Energías renovables</option>
                             <option value="Maquinaria agrícola">Maquinaria agrícola</option>
                             <option value="Forestación y Jardinería">Forestación y Jardinería</option>
-                            <option value="Agricultura de precision">Agricultura de precision</option>
+                            <option value="Agricultura de precision">Agricultura de precisión</option>
                         </select>
                         <input
                             type="number"

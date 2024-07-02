@@ -25,21 +25,21 @@ function Sidebar() {
                 <li className={selectedCategory === "/Products" ? "active" : ""}>
                     <Link to={"/Products"} onClick={() => setSelectedCategory("/Products")}>Productos</Link>
                 </li>
-                <h3>Categorias</h3>
+                <h3>Categorías</h3>
                 <div className='container-barra-category-products'>
                     <ul className='ul-bar-category'>
                         <li className={selectedCategory === "/products/Ferretería" ? "active" : ""} onClick={() => producsCategory("Ferretería")}>Ferretería  <HiOutlineWrenchScrewdriver /></li>
                         <li className={selectedCategory === "/products/Ropa de trabajo" ? "active" : ""} onClick={() => producsCategory("Ropa de trabajo")}>Ropa de trabajo <GiClothes /></li>
                         <li className={selectedCategory === "/products/Tranqueras" ? "active" : ""} onClick={() => producsCategory("Tranqueras")}>Tranqueras <GiRanchGate /></li>
-                        <li className={selectedCategory === "/products/Repuestos agricolas" ? "active" : ""} onClick={() => producsCategory("Repuestos agricolas")}>Repuestos agricolas <FaGears /></li>
+                        <li className={selectedCategory === "/products/Repuestos agricolas" ? "active" : ""} onClick={() => producsCategory("Repuestos agricolas")}>Repuestos agrícolas <FaGears /></li>
                         <li className={selectedCategory === "/products/Equipamiento vehículos" ? "active" : ""} onClick={() => producsCategory("Equipamiento vehículos")}>Equipamiento vehículos <TbCarCrane /></li>
-                        <li className={selectedCategory === "/products/Pulverizacíon" ? "active" : ""} onClick={() => producsCategory("Pulverizacíon")}>Pulverizacíon <TfiSpray /></li>
+                        <li className={selectedCategory === "/products/Pulverizacíon" ? "active" : ""} onClick={() => producsCategory("Pulverizacíon")}>Pulverización <TfiSpray /></li>
                         <li className={selectedCategory === "/products/Construcción" ? "active" : ""} onClick={() => producsCategory("Construcción")}>Construcción <TbGardenCart /></li>
                         <li className={selectedCategory === "/products/Infraestructura" ? "active" : ""} onClick={() => producsCategory("Infraestructura")}>Infraestructura <GiDrawbridge /></li>
-                        <li className={selectedCategory === "/products/Energias renovables" ? "active" : ""} onClick={() => producsCategory("Energias renovables")}>Energias renovables <MdSolarPower /></li>
+                        <li className={selectedCategory === "/products/Energias renovables" ? "active" : ""} onClick={() => producsCategory("Energias renovables")}>Energías renovables <MdSolarPower /></li>
                         <li className={selectedCategory === "/products/Maquinaria agrícola" ? "active" : ""} onClick={() => producsCategory("Maquinaria agrícola")}>Maquinaria agrícola <FaTractor /></li>
                         <li className={selectedCategory === "/products/Forestación y Jardinería" ? "active" : ""} onClick={() => producsCategory("Forestación y Jardinería")}>Forestación y Jardinería <GiFarmer /></li>
-                        <li className={selectedCategory === "/products/Agricultura de precision" ? "active" : ""} onClick={() => producsCategory("Agricultura de precision")}>Agricultura de precision <GiLaserPrecision /></li>
+                        <li className={selectedCategory === "/products/Agricultura de precision" ? "active" : ""} onClick={() => producsCategory("Agricultura de precision")}>Agricultura de precisión <GiLaserPrecision /></li>
                     </ul>
                 </div>
                 <li className={selectedCategory === "/Clients" ? "active" : ""}>
