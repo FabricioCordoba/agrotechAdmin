@@ -189,7 +189,7 @@ const Ventas = () => {
                                 <td className='celda'>{new Date(detalle.invoiceDate).toLocaleDateString()}</td>
                                 <td className='celda'>{detalle.product.product}</td>
                                 <td className='celda'>{detalle.amount_sold}</td>
-                                <td className='celda'>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(detalle.product.price)}</td>
+                                <td className='celda'>{Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(detalle.price_at_purchase)}</td>
                             </tr>
                         ))}
                     </tbody>
