@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { UserContext } from '../context/UserContext.jsx'
 import Nav from '../components/Nav'
 import { useState } from 'react';
@@ -9,7 +9,7 @@ import "../styles/login.css"
 import { Logo } from '../components/Logo.jsx';
 
 function Login() {
-
+                                       
     const { handleLogin } = useContext(UserContext);
 
     const [userLogin, setUserLogin] = useState({ email: '', password: '' });
@@ -49,10 +49,12 @@ function Login() {
     };
     return (
         <>
+        <div className='login-general'>
         <div className='logo-login'>
         <Logo/>
-
         </div>
+                <h1>CONTROL DE STOCK</h1>
+
             <div className="container-form-login">
                 <form className="form-login" onSubmit={handleSubmit}>
                     <label htmlFor="email" className='label-login'>Email</label>
@@ -66,6 +68,8 @@ function Login() {
             <div>
                 <Footer />
             </div>
+        </div>    
+       
         </>
     )
 }
