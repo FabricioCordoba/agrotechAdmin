@@ -1,9 +1,15 @@
+.login-general{
+max-height: 100vh;
+}
 .container-form-login {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
+    min-height: 60vh;
     background-color: #f4f4f9;
+  }
+  h1{
+    color: #126606;
   }
   
   .logo-login{
