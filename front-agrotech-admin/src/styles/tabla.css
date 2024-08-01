@@ -30,6 +30,17 @@ h1{
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+ 
+}
+.input-buscar-product{
+  text-align: center;  
+  width: 40%;
+  font-size: 16px;
+  border: #126606 solid 3px;
+  border-radius: 5px;
+  padding-bottom: 7px;
+  margin-right: 10px;
+  padding-top: 7px;
 }
 
 .btn-add-product:hover {

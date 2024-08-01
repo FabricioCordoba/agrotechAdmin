@@ -97,7 +97,7 @@ function TablaUser({ clients }) {
                         <h1>Listado de clientes</h1>
                     </div>
                     <input
-                        className='input-buscar'
+                        className='input-buscar-client'
                         type="text"
                         placeholder="Buscar por apellido..."
                         value={filtroApellido}
