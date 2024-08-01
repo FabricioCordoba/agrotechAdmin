@@ -11,14 +11,15 @@ const VentasPage = () => {
                 <Nav />
             </div>
 
-            <div className="container-sidebar">
-                <Sidebar />
+            
+            <div className="container">
+                <div className='container-sidebar'>
+                    <Sidebar />
+                </div>
                 <div className="content">
                     <Ventas />
-
                 </div>
             </div>
-
             <div>
                 <Footer />
             </div>

@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import { addProduct, deleteProduct, updateProductById } from '../service/productService';
-import "../styles/tabla.css"
+import "../styles/tabla.css";
 
 function Tabla({ products }) {
     const navigate = useNavigate();
@@ -25,7 +25,6 @@ function Tabla({ products }) {
 
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 10;
-    const totalPages = Math.ceil(products.length / productsPerPage);
 
     const handleChangeEdit = (e) => {
         e.preventDefault();
@@ -52,7 +51,7 @@ function Tabla({ products }) {
 
     const handleEditClick = (producto) => {
         setProductUpdate(producto);
-        modalEdit.showModal();
+        document.getElementById("modalEdit").showModal();
     };
 
     const handleDeleteClick = (product) => {
@@ -155,19 +154,24 @@ function Tabla({ products }) {
         }
     };
 
-    const paginatedProducts = products.slice(
+    const handleFilterByProduct = (e) => {
+        setFiltroProducto(e.target.value.toLowerCase());
+        setCurrentPage(1); // Resetear a la primera página cuando se aplica un filtro
+    };
+
+    // Filtrar productos
+    const filteredProducts = products.filter((product) =>
+        product.product.toLowerCase().includes(filtroProducto)
+    );
+
+    // Calcular productos para la página actual
+    const paginatedProducts = filteredProducts.slice(
         (currentPage - 1) * productsPerPage,
         currentPage * productsPerPage
     );
 
-    const handleFilterByProduct = (e) => {
-        setFiltroProducto(e.target.value.toLowerCase());
-    };
-
-    // Filtrar todos los productos basados en el filtroProducto
-    const filteredProducts = products.filter((product) =>
-        product.product.toLowerCase().includes(filtroProducto)
-    );
+    // Calcular el total de páginas basado en productos filtrados
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
     return (
         <div className='general-table'>
@@ -175,11 +179,11 @@ function Tabla({ products }) {
                 <h1>Lista de Productos</h1>
                 <div className='btn-adds'>
                     <input
-                        className='input-buscar'
+                        className='input-buscar-product'
                         type="text"
                         placeholder="Buscar producto"
                         value={filtroProducto}
-                        onChange={handleFilterByProduct} // Manejar cambios en el input de búsqueda
+                        onChange={handleFilterByProduct}
                     />
                     <button className='btn-add-product' onClick={() => handleAddClick(productAdd)}>Agregar Producto</button>
                     <button className='btn-add-csv' onClick={handleAddCsv}>Agregar CSV</button>
@@ -199,7 +203,7 @@ function Tabla({ products }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredProducts.map((product) => (
+                        {paginatedProducts.map((product) => (
                             <tr key={product.idProduct}>
                                 <td>{product.codeProduct}</td>
                                 <td>{product.product}</td>
@@ -226,133 +230,131 @@ function Tabla({ products }) {
                     <button onClick={handleNextPage} disabled={currentPage === totalPages}>Siguiente</button>
                 </div>
             </div>
-            {productUpdate && (
-                <dialog id="modalEdit">
-                    <h2>Editar Producto</h2>
-                    <form action="" method="dialog" id="form">
-                        <input
-                            type="text"
-                            name="codeProduct"
-                            value={productUpdate.codeProduct}
-                            onChange={handleChangeEdit}
-                        />
-                        <input
-                            type="text"
-                            name="product"
-                            value={productUpdate.product}
-                            onChange={handleChangeEdit}
-                        />
-                        <input
-                            type="text"
-                            name="description"
-                            value={productUpdate.description}
-                            onChange={handleChangeEdit}
-                        />
-                        <input
-                            type="number"
-                            name="price"
-                            value={productUpdate.price}
-                            onChange={handleChangeEdit}
-                        />
-                        <select
-                            type="text"
-                            name="category"
-                            onChange={handleChangeEdit}
-                            value={productUpdate.category}
-                        >
-                            <option value="Ferreteria">Ferretería</option>
-                            <option value="Ropa de trabajo">Ropa de trabajo</option>
-                            <option value="Tranqueras">Tranqueras</option>
-                            <option value="Repuestos agricolas">Repuestos agrícolas</option>
-                            <option value="Equipamiento vehículos">Equipamiento vehículos</option>
-                            <option value="Pulverizacío">Pulverización</option>
-                            <option value="Construcción">Construcción</option>
-                            <option value="Infraestructura">Infraestructura</option>
-                            <option value="Energias renovables">Energías renovables</option>
-                            <option value="Maquinaria agrícola">Maquinaria agrícola</option>
-                            <option value="Forestación y Jardinería">Forestación y Jardinería</option>
-                            <option value="Agricultura de precision">Agricultura de precisión</option>
-                        </select>
-                        <input
-                            type="number"
-                            name="amount"
-                            value={productUpdate.amount}
-                            onChange={handleChangeEdit}
-                        />
-                        <input
-                            type="file"
-                            name='images'
-                            onChange={handleChangeEdit}
-                        />
-                        <button className='btn-edit-guardar' onClick={handleSaveClick}>Guardar</button>
-                        <button className='btn-edi-cancelar'>Cancelar</button>
-                    </form>
-                </dialog>
-            )}
-            {productUpdate && (
-                <dialog ref={modalDeleteRef} id='modalDelete' className='modal-delete-product'>
-                    <p>¿Desea eliminar el producto {productUpdate.product}?</p>
-                    <button className='btn-delete-aceptar' onClick={confirmDelete}>Aceptar</button>
-                    <button className='btn-delete-cancelar' onClick={cancelDeleteModal}>Cancelar</button>
-                </dialog>
-            )}
-            {products && (
-                <dialog ref={modalAddProductRef} id='modalAddProduct'>
-                    <form action="" method="dialog" id="formAdd">
-                        <input
-                            type="text"
-                            name="product"
-                            placeholder='Nombre Producto'
-                            onChange={handleChangeAdd}
-                        />
-                        <input
-                            type="text"
-                            name="description"
-                            placeholder='Descripción'
-                            onChange={handleChangeAdd}
-                        />
-                        <input
-                            type="number"
-                            name="price"
-                            placeholder='Precio'
-                            onChange={handleChangeAdd}
-                        />
-                        <select
-                            type="text"
-                            name="category"
-                            onChange={handleChangeAdd}
-                        >
-                            <option value="Ferreteria">Ferretería</option>
-                            <option value="Ropa de trabajo">Ropa de trabajo</option>
-                            <option value="Tranqueras">Tranqueras</option>
-                            <option value="Repuestos agricolas">Repuestos agricolas</option>
-                            <option value="Equipamiento vehículos">Equipamiento vehículos</option>
-                            <option value="Pulverizacío">Pulverización</option>
-                            <option value="Construcción">Construcción</option>
-                            <option value="Infraestructura">Infraestructura</option>
-                            <option value="Energias renovables">Energías renovables</option>
-                            <option value="Maquinaria agrícola">Maquinaria agrícola</option>
-                            <option value="Forestación y Jardinería">Forestación y Jardinería</option>
-                            <option value="Agricultura de precision">Agricultura de precisión</option>
-                        </select>
-                        <input
-                            type="number"
-                            name="amount"
-                            placeholder='Stock'
-                            onChange={handleChangeAdd}
-                        />
-                        <input
-                            type="file"
-                            name="images"
-                            placeholder='Imagen'
-                            className='produc-edit-img'
-                            onChange={handleChangeAdd}
-                        />
-                        <button className='btn-modal-add-product-aceptar' onClick={confirmAdd}>Guardar</button>
-                        <button className='btn-modal-add-product-cancelar' onClick={cancelAddModal}>Cancelar</button>
-                    </form>
-                </dialog>
-            )}
+            {/* Modales para editar, eliminar y agregar productos */}
+            <dialog id="modalEdit">
+                <h2>Editar Producto</h2>
+                <form action="" method="dialog" id="form">
+                    <input
+                        type="text"
+                        name="codeProduct"
+                        value={productUpdate.codeProduct}
+                        onChange={handleChangeEdit}
+                    />
+                    <input
+                        type="text"
+                        name="product"
+                        value={productUpdate.product}
+                        onChange={handleChangeEdit}
+                    />
+                    <input
+                        type="text"
+                        name="description"
+                        value={productUpdate.description}
+                        onChange={handleChangeEdit}
+                    />
+                    <input
+                        type="number"
+                        name="price"
+                        value={productUpdate.price}
+                        onChange={handleChangeEdit}
+                    />
+                    <select
+                        type="text"
+                        name="category"
+                        onChange={handleChangeEdit}
+                        value={productUpdate.category}
+                    >
+                        <option value="Ferreteria">Ferretería</option>
+                        <option value="Ropa de trabajo">Ropa de trabajo</option>
+                        <option value="Tranqueras">Tranqueras</option>
+                        <option value="Repuestos agricolas">Repuestos agrícolas</option>
+                        <option value="Equipamiento vehículos">Equipamiento vehículos</option>
+                        <option value="Pulverizacío">Pulverización</option>
+                        <option value="Construcción">Construcción</option>
+                        <option value="Infraestructura">Infraestructura</option>
+                        <option value="Energias renovables">Energías renovables</option>
+                        <option value="Maquinaria agrícola">Maquinaria agrícola</option>
+                        <option value="Forestación y Jardinería">Forestación y Jardinería</option>
+                        <option value="Agricultura de precision">Agricultura de precisión</option>
+                    </select>
+                    <input
+                        type="number"
+                        name="amount"
+                        value={productUpdate.amount}
+                        onChange={handleChangeEdit}
+                    />
+                    <input
+                        type="file"
+                        name='images'
+                        onChange={handleChangeEdit}
+                    />
+                    <button className='btn-edit-guardar' onClick={handleSaveClick}>Guardar</button>
+                    <button className='btn-edi-cancelar'>Cancelar</button>
+                </form>
+            </dialog>
+
+            <dialog ref={modalDeleteRef} id='modalDelete' className='modal-delete-product'>
+                <p>¿Desea eliminar el producto {productUpdate.product}?</p>
+                <button className='btn-delete-aceptar' onClick={confirmDelete}>Aceptar</button>
+                <button className='btn-delete-cancelar' onClick={cancelDeleteModal}>Cancelar</button>
+            </dialog>
+
+            <dialog ref={modalAddProductRef} id='modalAddProduct'>
+                <form action="" method="dialog" id="formAdd">
+                    <input
+                        type="text"
+                        name="product"
+                        placeholder='Nombre Producto'
+                        onChange={handleChangeAdd}
+                    />
+                    <input
+                        type="text"
+                        name="description"
+                        placeholder='Descripción'
+                        onChange={handleChangeAdd}
+                    />
+                    <input
+                        type="number"
+                        name="price"
+                        placeholder='Precio'
+                        onChange={handleChangeAdd}
+                    />
+                    <select
+                        type="text"
+                        name="category"
+                        onChange={handleChangeAdd}
+                    >
+                        <option value="Ferreteria">Ferretería</option>
+                        <option value="Ropa de trabajo">Ropa de trabajo</option>
+                        <option value="Tranqueras">Tranqueras</option>
+                        <option value="Repuestos agricolas">Repuestos agrícolas</option>
+                        <option value="Equipamiento vehículos">Equipamiento vehículos</option>
+                        <option value="Pulverizacío">Pulverización</option>
+                        <option value="Construcción">Construcción</option>
+                        <option value="Infraestructura">Infraestructura</option>
+                        <option value="Energias renovables">Energías renovables</option>
+                        <option value="Maquinaria agrícola">Maquinaria agrícola</option>
+                        <option value="Forestación y Jardinería">Forestación y Jardinería</option>
+                        <option value="Agricultura de precision">Agricultura de precisión</option>
+                    </select>
+                    <input
+                        type="number"
+                        name="amount"
+                        placeholder='Stock'
+                        onChange={handleChangeAdd}
+                    />
+                    <input
+                        type="file"
+                        name="images"
+                        placeholder='Imagen'
+                        className='produc-edit-img'
+                        onChange={handleChangeAdd}
+                    />
+                    <button className='btn-modal-add-product-aceptar' onClick={confirmAdd}>Guardar</button>
+                    <button className='btn-modal-add-product-cancelar' onClick={cancelAddModal}>Cancelar</button>
+                </form>
+            </dialog>
+
             <dialog ref={modalCsvRef} id='modalCsv'>
                 <form action="" method="dialog" id="formAddCsv">
                     <input type="file" onChange={handleFileChange} />
