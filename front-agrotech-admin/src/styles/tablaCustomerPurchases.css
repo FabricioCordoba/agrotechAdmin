@@ -3,7 +3,6 @@
     background-color: #fff;
     color: #333;
     padding-top: 20px;
-
 }
 
 .general-tabla-historialCompra h1 {
@@ -23,7 +22,7 @@
 }
 
 .tabla-historial tr:nth-child(even) {
-    background-color: #f9f9f9; /* Color de fondo para las filas pares */
+    background-color: #f9f9f9; 
   }
 
 .tabla-historial th,

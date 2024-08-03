@@ -1,4 +1,4 @@
-/* styles/register.css */
+
 
 body {
     font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 60px); /* Altura menos la altura del Nav y Footer */
+    height: calc(100vh - 60px); 
     padding: 20px;
   }
   

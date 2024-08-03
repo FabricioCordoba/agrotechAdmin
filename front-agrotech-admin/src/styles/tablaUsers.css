@@ -3,9 +3,14 @@
     background-color: #fff;
     color: #333;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-   
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);   
   }
+
+  .search-client{
+    display: flex;
+    align-items: baseline;    
+  }
+
   .input-buscar-client{
     text-align: center;
     margin-top: 20px;
@@ -17,7 +22,15 @@
     border-radius: 4px;
   }
   
-  .table-container{
+  .container-table-client{
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 100%;
+    overflow-x: auto;
+    background-color: white;
+  }
+  
+  .container-table.client{
     overflow-x: auto;
   background-color: white;
   }
@@ -42,7 +55,7 @@
   }
   
  .clients-table tr:nth-child(even) {
-    background-color: #f9f9f9; /* Color de fondo para las filas pares */
+    background-color: #f9f9f9; 
   }
   
   .edit-form input[type="text"] {

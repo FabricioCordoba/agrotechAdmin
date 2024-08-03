@@ -15,21 +15,27 @@ function Clients() {
 
     return (
         <>
-            <div>
-                <Nav />
-            </div>
-            <div className="container-sidebar">
-                <Sidebar />
-                <div>
-                    <TablaUser clients={clients} />
+            <div className='container-general-client'>
+                <div className='nav'>
+                    <Nav />
+                </div>
+                <div className='container-client-sidebar'>
+                    <div className="container-sidebar">
+                        <Sidebar />
+                    </div>
 
+                    <div className='content'>
+                        <TablaUser clients={clients} />
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <Footer />
                 </div>
             </div>
 
-
-            <div>
-                <Footer />
-            </div>
         </>
 
     )

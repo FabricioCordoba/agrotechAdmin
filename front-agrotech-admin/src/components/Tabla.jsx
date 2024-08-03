@@ -156,21 +156,21 @@ function Tabla({ products }) {
 
     const handleFilterByProduct = (e) => {
         setFiltroProducto(e.target.value.toLowerCase());
-        setCurrentPage(1); // Resetear a la primera página cuando se aplica un filtro
+        setCurrentPage(1); 
     };
 
-    // Filtrar productos
+   
     const filteredProducts = products.filter((product) =>
         product.product.toLowerCase().includes(filtroProducto)
     );
 
-    // Calcular productos para la página actual
+  
     const paginatedProducts = filteredProducts.slice(
         (currentPage - 1) * productsPerPage,
         currentPage * productsPerPage
     );
 
-    // Calcular el total de páginas basado en productos filtrados
+ 
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
     return (
@@ -230,7 +230,7 @@ function Tabla({ products }) {
                     <button onClick={handleNextPage} disabled={currentPage === totalPages}>Siguiente</button>
                 </div>
             </div>
-            {/* Modales para editar, eliminar y agregar productos */}
+           
             <dialog id="modalEdit">
                 <h2>Editar Producto</h2>
                 <form action="" method="dialog" id="form">

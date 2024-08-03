@@ -1,7 +1,7 @@
-.container-client-sidebar {
+.container-purchases-sidebar {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    background-color: #a6a6a6;
+   
 }
 
 .container-sidebar {

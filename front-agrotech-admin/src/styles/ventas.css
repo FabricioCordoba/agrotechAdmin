@@ -2,8 +2,16 @@
   width: 100%;
   background-color: #fff;
   color: #333;
-  padding: 20px;
-  margin-left: 100px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #a6a6a6;
+}
+.table-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  min-height: 100%;
+  overflow-x: auto;
+  background-color: white;
 }
 
 .general-ventas h1 {
@@ -16,6 +24,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  background-color: #fff;
 }
 
 .input-filtros-tiempo label, .filtro-por-producto label, .filtro-dia label, .filtro-semana label, .flitro-mes label {
@@ -66,7 +75,7 @@
 }
 
 .tabla-ventas tr:last-child {
-  border-bottom: none; /* Elimina el borde inferior de la última fila */
+  border-bottom: none; 
 }
 
 .celda {
@@ -74,7 +83,7 @@
 }
 
 .tabla-ventas tr:nth-child(even) {
-  background-color: #f9f9f9; /* Color de fondo para las filas pares */
+  background-color: #f9f9f9; 
 }
 
 .pagination {

@@ -12,6 +12,9 @@ h1{
   text-decoration: underline;
 }
 .table-container {
+  padding-left: 20px;
+  padding-right: 20px;
+  min-height: 100%;
   overflow-x: auto;
   background-color: white;
 }
@@ -139,17 +142,10 @@ dialog input[type="file"] {
  font-size: 26px;
 }
 
-
-.table-container {
-    padding-left: 20px;
-    padding-right: 20px;
-    min-height: 100%;
-}
-
 .product-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px; /* Ajusta el margen superior de la tabla */
+    margin-top: 20px; 
 }
 
 .product-table th,
@@ -170,17 +166,17 @@ dialog input[type="file"] {
     border-radius: 5%;
 }
 .product-table tr:nth-child(even) {
-  background-color: #f9f9f9; /* Color de fondo para las filas pares */
+  background-color: #f9f9f9; 
 }
 
-/* Estilo para las filas de la tabla */
+
 .product-table tr {
-    border-bottom: 1px solid #ddd; /* Borde inferior entre filas */
+    border-bottom: 1px solid #ddd; 
 }
 
-/* Estilo para la última fila de la tabla */
+
 .product-table tr:last-child {
-    border-bottom: none; /* Elimina el borde inferior de la última fila */
+    border-bottom: none; 
 }
 .btn-delete-aceptar{
   padding: 10px 20px;

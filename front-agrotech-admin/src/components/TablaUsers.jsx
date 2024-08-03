@@ -35,7 +35,7 @@ function TablaUser({ clients }) {
             email: user?.email || '',
             address: user?.address || ''
         });
-    }, [user]); // Update clientUpdate whenever user changes
+    }, [user]); 
 
     function handleChangeEditClient(e) {
         e.preventDefault();
@@ -90,12 +90,12 @@ function TablaUser({ clients }) {
     const paginatedClients = filteredClients.slice((currentPage - 1) * clientsPerPage, currentPage * clientsPerPage);
 
     return (
-        <>
+        
             <div className='general-tabla-users'>
-                <div className='table-container'>
-                    <div>
+                <div className='container-table-client'>
+                    
                         <h1>Listado de clientes</h1>
-                    </div>
+                    <div className='search-client'>
                     <input
                         className='input-buscar-client'
                         type="text"
@@ -103,6 +103,8 @@ function TablaUser({ clients }) {
                         value={filtroApellido}
                         onChange={handleFilterByLastName}
                     />
+                    </div>
+                  
                     <table className="clients-table">
                         <thead>
                             <tr>
@@ -192,7 +194,7 @@ function TablaUser({ clients }) {
                     </dialog>
                 )}
             </div>
-        </>
+        
     );
 }
 
