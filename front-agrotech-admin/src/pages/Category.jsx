@@ -19,25 +19,29 @@ function Category() {
         // Filtrar los productos por la categoría actual
 
         const filteredProducts = products.filter(product => product.category === category);
-       
+
         setProductsByCategory(filteredProducts);
     }, [products, category]);
 
     return (
         <>
-        <div className='nav-category'>
-            <Nav />
-        </div>
-        <div className="container-category">
-            <div className='container-sidebar-category'>
-                <Sidebar />
+            <div className='container-general-category'>
+
+                <div className='nav-category'>
+                    <Nav />
+                </div>
+                <div className="container-category-sidebar">
+                    <div className='container-sidebar'>
+                        <Sidebar />
+                    </div>
+                    <div className="content-category">
+                        <Tabla products={productsByCategory} />
+                    </div>
+                </div>
+                <Footer />
             </div>
-            <div className="content-category">
-                <Tabla products={productsByCategory} />
-            </div>
-        </div>
-        <Footer />
-    </>
+
+        </>
 
     );
 }

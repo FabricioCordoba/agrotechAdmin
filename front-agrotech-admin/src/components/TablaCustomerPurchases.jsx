@@ -17,7 +17,7 @@ const TablaCustomerPurchases = ({ idUser }) => {
                     fetch(`http://localhost:3000/user/${idUser}`).then(response => response.json())
                 ]);
 
-                // Asegurarse de que invoicesResponse sea un arreglo
+      
                 setInvoices(Array.isArray(invoicesResponse) ? invoicesResponse : []);
                 setClient(clientResponse);
             } catch (err) {

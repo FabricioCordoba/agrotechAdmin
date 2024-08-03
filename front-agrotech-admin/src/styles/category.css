@@ -1,17 +1,16 @@
-.nav-category {
-    width: 100%;
+.container-category-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+ 
 }
 
-.container-category {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
-    box-sizing: border-box;
-    background-color: #a6a6a6;
+.container-sidebar-category {
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 15px;
+  box-sizing: border-box;
 }
- .container-sidebar-category{
-    min-width: 250px;
-    border-color: black solid 1px;
- }
 
+.content-category {
+  width: 100%;
+}
