@@ -11,6 +11,7 @@ import { RutasProtegidas } from "./components/RutasProtegidas";
 import { UserContext } from "./context/UserContext";
 import { useContext } from "react";
 import React from "react";
+import "./app.css"
 
 function App() {
   const { isLoggedIn } = useContext(UserContext);

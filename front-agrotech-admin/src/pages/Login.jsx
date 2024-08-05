@@ -9,7 +9,7 @@ import "../styles/login.css"
 import { Logo } from '../components/Logo.jsx';
 
 function Login() {
-                                       
+
     const { handleLogin } = useContext(UserContext);
 
     const [userLogin, setUserLogin] = useState({ email: '', password: '' });
@@ -49,27 +49,27 @@ function Login() {
     };
     return (
         <>
-        <div className='login-general'>
-        <div className='logo-login'>
-        <Logo/>
-        </div>
+            <div className='login-general'>
+                <div className='logo-login'>
+                    <Logo />
+                </div>
                 <h1>CONTROL DE STOCK</h1>
 
-            <div className="container-form-login">
-                <form className="form-login" onSubmit={handleSubmit}>
-                    <label htmlFor="email" className='label-login'>Email</label>
-                    <input type="text" name='email' id='email' className='input-login' placeholder='Ingrese su Email' onChange={handleChange} />
-                    <label htmlFor="password" className='label-login'>Contraseña</label>
-                    <input type="password" name='password' id='password' className='input-login' placeholder='Ingrese su Contraseña' onChange={handleChange} />
-                    <p id="notificacion" ref={notificacionRef}></p>
-                    <button className='btn-login' type='submit'>Iniciar sesión</button>
-                </form>
+                <div className="container-form-login">
+                    <form className="form-login" onSubmit={handleSubmit}>
+                        <label htmlFor="email" className='label-login'>Email</label>
+                        <input type="text" name='email' id='email' className='input-login' placeholder='Ingrese su Email' onChange={handleChange} />
+                        <label htmlFor="password" className='label-login'>Contraseña</label>
+                        <input type="password" name='password' id='password' className='input-login' placeholder='Ingrese su Contraseña' onChange={handleChange} />
+                        <p id="notificacion" ref={notificacionRef}></p>
+                        <button className='btn-login' type='submit'>Iniciar sesión</button>
+                    </form>
+                </div>
+                <div>
+                    <Footer />
+                </div>
             </div>
-            <div>
-                <Footer />
-            </div>
-        </div>    
-       
+
         </>
     )
 }
